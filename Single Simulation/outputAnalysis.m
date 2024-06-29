@@ -199,6 +199,8 @@ NRMSE_DM = goodnessOfFit(iterationMean(1:ITERATIONS_TO_SHOW)', discrete_model_re
 % assumptions do not hold. We already have theoretical curve and possibly
 % line.
 
+%%
+
 %iterationMean = table2array(all_my_data(242,:));
 compareResidualsModels(ITERATIONS_TO_SHOW,iterationMean,continuous_population,discrete_model_real,NRMSE_CM,NRMSE_DM)
 
