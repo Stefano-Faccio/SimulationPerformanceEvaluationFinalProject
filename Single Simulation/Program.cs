@@ -53,25 +53,21 @@ namespace LogisticSimulation
 
         static string[] MultipleSimulations()
         {
-            List<short>[] results = new List<short>[NSIMULATIONS];
             string[] _results = new string[NSIMULATIONS];
+            List<short> simulationInfo = new(new short[ITERATIONS + 1]);
 
-            Parallel.For(0, NSIMULATIONS, (i) =>
+            for (int i = 0; i < NSIMULATIONS; i++)
             {
-                List<short> simulationInfo = new(ITERATIONS+1);
                 Simulation sim = new(START_POPULATION, REPRODUCTION_PROBABILITY, DEATH_PROBABILITY, CROWDING_COEFFICIENT, Prime.GetNextPrime());
 
-                simulationInfo.Add(START_POPULATION);
+                simulationInfo[0] = START_POPULATION;
                 for (int j = 1; j < ITERATIONS + 1; j++)
-                    simulationInfo.Add(sim.NextIteration());
+                    simulationInfo[j] = sim.NextIteration();
 
-                results[i] = simulationInfo;
-            });
+                _results[i] = String.Join(" ", simulationInfo);
+            }
 
             Console.WriteLine("Done");
-            for (int i = 0; i < NSIMULATIONS; i++)
-                _results[i] = String.Join(" ", results[i]);
-
             return _results;
         }
     }
