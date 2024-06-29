@@ -120,7 +120,7 @@ function Plot_With_Discrete(Simulation, Discrete_Model, Continuos_Model, Gillesp
     %Smoot Gillespie_Model
     %errorbar(1:ITERATIONS, Discrete_Model-Continuos_Model, ci_down, ci_up, ".");
     %plot(1:ITERATIONS, Simulation(1, :) - Discrete_Model, 'DisplayName', 'Errore Gillespie', LineWidth=2);
-    plot(Gillespie_Model(1, :), Gillespie_Model(2, :) - Continuos_Model(Gillespie_Model(1, :)-1), ".", 'DisplayName', 'Errore Gillespie', LineWidth=2);
+    plot(Gillespie_Model(1, :), Gillespie_Model(2, :) - Continuos_Model(Gillespie_Model(1, :)-1), 'DisplayName', 'Errore Gillespie', ".", LineWidth=2);
     xlabel("Time")
     ylabel("Error")
     xlim([0 ITERATIONS_TO_SHOW]);
