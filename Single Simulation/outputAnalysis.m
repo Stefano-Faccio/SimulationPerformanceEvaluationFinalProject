@@ -210,7 +210,7 @@ compareResidualsModels(ITERATIONS_TO_SHOW,iterationMean,continuous_population,di
 % Let us implement the state of the art Gillespie algorithm for logistic
 % growth simulation
 
-NSIMULATIONS_GILLEPSIE = 10000;
+NSIMULATIONS_GILLEPSIE = 1000;
 ITERATIONS_GILLEPSIE = 200000;
 
 [Gillespie_Model_Times, Gillespie_Model_Values] = gillespie(START_POPULATION, GROWTH_RATE, CARRYING_CAPACITY, CROWDING_COEFFICIENT, ITERATIONS_GILLEPSIE, NSIMULATIONS_GILLEPSIE);
