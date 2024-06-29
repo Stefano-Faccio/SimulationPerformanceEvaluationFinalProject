@@ -209,3 +209,12 @@ compareResidualsModels(ITERATIONS_TO_SHOW,iterationMean,continuous_population,di
 % Is our simulation the only one that behaves like this?
 % Let us implement the state of the art Gillespie algorithm for logistic
 % growth simulation
+
+NSIMULATIONS_GILLEPSIE = 10000;
+ITERATIONS_GILLEPSIE = 200000;
+
+[Gillespie_Model_Times, Gillespie_Model_Values] = gillespie(START_POPULATION, GROWTH_RATE, CARRYING_CAPACITY, CROWDING_COEFFICIENT, ITERATIONS_GILLEPSIE, NSIMULATIONS_GILLEPSIE);
+Gillespie_Model = [Gillespie_Model_Times; Gillespie_Model_Values];
+fprintf('DONE \n');
+
+%%
