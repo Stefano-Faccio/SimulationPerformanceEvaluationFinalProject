@@ -27,7 +27,8 @@ function [popTGrandMean,popTMean, popTVar] = plotLogIteration(T, arrayE, arrayL,
     t = 0:nIter-1;
     t = t(1:end-(end-timeCut));
     colorCount = 0;
-    figure;
+    
+    figure; %
     hold on;
     popMean = [];
     

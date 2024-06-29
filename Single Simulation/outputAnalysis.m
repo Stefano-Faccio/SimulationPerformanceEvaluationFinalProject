@@ -122,8 +122,13 @@ colors = ["#C0C0C0" "#E6194B" "#008080" "#3CB44B" "#FFE119" "#4363D8" "#F58231" 
 exponential_population = START_POPULATION*exp(GROWTH_RATE.*TIME);
 ymin=0;
 ymax=CARRYING_CAPACITY+400;
+
+%figure;
+%tiledlayout(2,1)
+%nexttile
 [iterationGrandMean,iterationMean, iterationVar]  = plotLogIteration(all_my_data_t, exponential_population, continuous_population, NSIMULATIONS, ITERATIONS, ITERATIONS, 0, colors,ymin,ymax, CROWDING_COEFFICIENT,REPRODUCTION_PROBABILITY,DEATH_PROBABILITY,START_POPULATION,INFLECTION_POPULATION, INFLECTION_TIME);
 
+%nexttile
 % Plot of the experimental logistic growths against the theoretical one (for first n iterations)
 % iteration cut at 2* inflection time
 [nIterationGrandMean,nIterationMean]  = plotLogIteration(all_my_data_t, exponential_population, continuous_population, NSIMULATIONS, ITERATIONS, ITERATIONS_TO_SHOW, 0, colors,ymin,ymax, CROWDING_COEFFICIENT,REPRODUCTION_PROBABILITY,DEATH_PROBABILITY,START_POPULATION, INFLECTION_POPULATION, INFLECTION_TIME);
