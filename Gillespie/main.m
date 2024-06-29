@@ -42,7 +42,7 @@ end
 %Computo il modello teorico
 
 Continuos_Model = @(x) (CARRYING_CAPACITY * START_POPULATION) ./ ( (CARRYING_CAPACITY - START_POPULATION) .* exp((-GROWTH_RATE) .* x) + START_POPULATION );
-
+Continuos_Model_Values = Continuos_Model(0:(ITERATIONS-1));
 %-----------------------------------------------------------------------------
 %Computo il modello stocastico Gillespie
 
@@ -100,9 +100,9 @@ function Plot_With_Discrete(Simulation, Discrete_Model, Continuos_Model, Gillesp
     %Discrete Model
     stairs(Discrete_Model, '- o', 'DisplayName', 'Modello discreto', LineWidth=0.5, MarkerFaceColor='#ff6666', MarkerEdgeColor='#ff6666', Color='#ffcccc');
     %Continuos Model
-    %plot(1:ITERATIONS, Continuos_Model(1:ITERATIONS),'-k', 'DisplayName', 'Modello continuo', LineWidth=2);
+    plot(1:ITERATIONS, Continuos_Model(0:(ITERATIONS-1)),'-k', 'DisplayName', 'Modello continuo', LineWidth=2);
     %Simulation
-    %errorbar(1:ITERATIONS, Simulation(1, :), Simulation(2, :), Simulation(3, :), '.', 'DisplayName', 'Simulation', 'Color', '#0072BD');
+    errorbar(1:ITERATIONS, Simulation(1, :), Simulation(2, :), Simulation(3, :), '.', 'DisplayName', 'Simulation', 'Color', '#0072BD');
     %Gillespie
     tims = Gillespie_Model(1, :);
     t_values = Gillespie_Model(2, :);
@@ -119,7 +119,8 @@ function Plot_With_Discrete(Simulation, Discrete_Model, Continuos_Model, Gillesp
     grid on;
     %Smoot Gillespie_Model
     %errorbar(1:ITERATIONS, Discrete_Model-Continuos_Model, ci_down, ci_up, ".");
-    plot(1:ITERATIONS, Simulation(1, :) - Discrete_Model, 'DisplayName', 'Errore Gillespie', LineWidth=2);
+    %plot(1:ITERATIONS, Simulation(1, :) - Discrete_Model, 'DisplayName', 'Errore Gillespie', LineWidth=2);
+    plot(Gillespie_Model(1, :), Gillespie_Model(2, :) - Continuos_Model(Gillespie_Model(1, :)-1), ".", 'DisplayName', 'Errore Gillespie', LineWidth=2);
     xlabel("Time")
     ylabel("Error")
     xlim([0 ITERATIONS_TO_SHOW]);
