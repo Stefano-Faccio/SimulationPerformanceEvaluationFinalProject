@@ -218,3 +218,29 @@ Gillespie_Model = [Gillespie_Model_Times; Gillespie_Model_Values];
 fprintf('DONE \n');
 
 %%
+
+gillespie_continuous_population =  continuous_model([CARRYING_CAPACITY GROWTH_RATE],Gillespie_Model_Times-1);
+
+figure;
+tl = tiledlayout(2,1);
+nexttile
+hold on;
+box on;
+plot(Gillespie_Model_Times-1,Gillespie_Model_Values, ".", Color="#EC3B83");
+plot(Gillespie_Model_Times-1,gillespie_continuous_population, Color="#29AB87", LineWidth=2);
+xlabel("time")
+ylabel("\mu(N_i)")
+axis tight;
+hold off;
+
+nexttile
+plot(Gillespie_Model_Times,Gillespie_Model_Values-gillespie_continuous_population, ".",Color="#29AB87", LineWidth=1.5);
+box on;
+yline(0, '-', '\DeltaN=0',Color="#8C92AC",LineWidth=1.25);
+ylabel("\DeltaN");
+xlabel("t (time) - units");
+title(["B) Difference in population (\DeltaN) between Gillespie \mu(N_i) values"," and continuous logistic growth per time unit;"]);
+legend("CM Raw residuals", Location="southeast");
+axis tight;
+
+%%
