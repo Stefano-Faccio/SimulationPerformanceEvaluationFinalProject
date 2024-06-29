@@ -219,10 +219,16 @@ fprintf('DONE \n');
 
 %%
 
+gillespie_NRMSE_CM = goodnessOfFit(Gillespie_Model_Values', gillespie_continuous_population', 'NRMSE'); %
+
+Gillespie_Model_Times_Cut = Gillespie_Model_Times(Gillespie_Model_Times<= ITERATIONS_TO_SHOW);
+
+gillespie_NRMSE_CM_cut = goodnessOfFit(Gillespie_Model_Values(1:length(Gillespie_Model_Times_Cut))', gillespie_continuous_population(1:length(Gillespie_Model_Times_Cut))', 'NRMSE'); %
+
 gillespie_continuous_population =  continuous_model([CARRYING_CAPACITY GROWTH_RATE],Gillespie_Model_Times-1);
 
 figure;
-tl = tiledlayout(2,1);
+tl = tiledlayout(2,2);
 nexttile
 hold on;
 box on;
@@ -230,11 +236,12 @@ plot(Gillespie_Model_Times-1,Gillespie_Model_Values, ".", Color="#EC3B83");
 plot(Gillespie_Model_Times-1,gillespie_continuous_population, Color="#29AB87", LineWidth=2);
 xlabel("time")
 ylabel("\mu(N_i)")
+title(["A) Big picture of the CM fitting of the experimental Gillepsie \mu(N_i) values"]);
 axis tight;
 hold off;
 
 nexttile
-plot(Gillespie_Model_Times,Gillespie_Model_Values-gillespie_continuous_population, ".",Color="#29AB87", LineWidth=1.5);
+plot(Gillespie_Model_Times-1,Gillespie_Model_Values-gillespie_continuous_population, ".",Color="#29AB87", LineWidth=1.5);
 box on;
 yline(0, '-', '\DeltaN=0',Color="#8C92AC",LineWidth=1.25);
 ylabel("\DeltaN");
@@ -242,5 +249,27 @@ xlabel("t (time) - units");
 title(["B) Difference in population (\DeltaN) between Gillespie \mu(N_i) values"," and continuous logistic growth per time unit;"]);
 legend("CM Raw residuals", Location="southeast");
 axis tight;
+
+nexttile
+hold on;
+residuals_1 =Gillespie_Model_Values-gillespie_continuous_population;
+h1 = histogram(residuals_1(1:length(Gillespie_Model_Times_Cut)), 'Normalization','pdf',FaceColor="#29AB87");
+box on;
+title("C) CM Histogram plot of the raw residuals;","time range: [t0 - 2t* (" + ITERATIONS_TO_SHOW+")]");
+xlabel("CM Raw residuals (x)")
+ylabel("Frequency(x)");
+hold off;
+
+nexttile
+hold on;
+n1 = normplot(residuals_1(1:length(Gillespie_Model_Times_Cut)));
+props = get(n1,{'marker' 'linestyle' 'color'});
+set(n1, 'color', "#29AB87");
+legend(["x<Q1 or x> Q3","Q1<x<Q3", "x"], Location="northwest");
+xlabel("CM Raw residuals (x)")
+ylabel("Probability(x)")
+title("D) CM Normal probability plot; NRMSE: "+gillespie_NRMSE_CM+";","time range: [t0 - 2t* (" + ITERATIONS_TO_SHOW+")];");
+box on;
+hold off;
 
 %%

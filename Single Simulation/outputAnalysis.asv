@@ -219,6 +219,7 @@ fprintf('DONE \n');
 
 %%
 
+gilelspie_NRMSE_CM = goodnessOfFit(Gillespie_Model_Values', , 'NRMSE'); %
 gillespie_continuous_population =  continuous_model([CARRYING_CAPACITY GROWTH_RATE],Gillespie_Model_Times-1);
 
 figure;
@@ -232,6 +233,7 @@ xlabel("time")
 ylabel("\mu(N_i)")
 axis tight;
 hold off;
+
 nexttile
 plot(Gillespie_Model_Times,Gillespie_Model_Values-gillespie_continuous_population, ".",Color="#29AB87", LineWidth=1.5);
 box on;
