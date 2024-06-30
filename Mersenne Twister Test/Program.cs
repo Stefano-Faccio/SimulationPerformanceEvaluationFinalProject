@@ -38,7 +38,7 @@ namespace MersenneTwistertest
             for (int i = 0; i < NSEED; i++)
             {
                 //Prendo il seed
-                seeds.Add(Seed.GetNextSeed());
+                seeds.Add(Prime.GetNextPrime());
                 //Nuovo mersenne twister
                 MersenneTwister mst = new(seeds[i]);
                 //Campiono
