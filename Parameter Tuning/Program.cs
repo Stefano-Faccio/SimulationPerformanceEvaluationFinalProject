@@ -118,7 +118,7 @@ namespace LogisticSimulation
 
         static void MultipleSimulations(List<int> startPopulations, List<double> crowdingCoefficients, List<double> reproductionProbabilities, List<double> deathProbabilities, string[,,] results)
         {
-            Parallel.For(0, startPopulations.Count, i =>
+            for(int i = 0; i < startPopulations.Count; i++)
             {
                 int startPopulation = startPopulations[i];
                 for (int y = 0; y < crowdingCoefficients.Count; y++)
@@ -133,7 +133,7 @@ namespace LogisticSimulation
                     }
                 }
                 Console.Write('-');
-            });
+            }
         }
 
         static string SingleSimulation(int nCreatureStart, double crowdingCoefficient, double reproductionProbability, double deathProbability)
