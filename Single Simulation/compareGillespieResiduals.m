@@ -30,6 +30,7 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     hold on;
     residuals_1 = Gillespie_Model_Values-gillespie_continuous_population;
     histogram(residuals_1(1:length(Gillespie_Model_Times_Head)),20, 'Normalization','pdf');
+    %disp(length(Gillespie_Model_Times_Head));
     box on;
     title(["A.1) CM Histogram plot of the head ","(short-term) raw residuals;"],"time range: [t_0 - 2t* (~"+ITERATIONS_TO_SHOW+")]");
     xlabel("CM Raw residuals (x)")
@@ -46,6 +47,7 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     hold off;
     
     Gillespie_Model_Times_tail = Gillespie_Model_Times(Gillespie_Model_Times-1 >=ITERATIONS_TO_SHOW);
+    %disp(length(Gillespie_Model_Times_tail));
     nexttile(6)
     hold on;
     %histogram(residuals_1(end-length(Gillespie_Model_Times_tail):end),20, 'Normalization','pdf');
