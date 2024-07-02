@@ -76,10 +76,4 @@ function compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW, MeanArray, CM)
     title("C.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [2t* - t_{max}];"]);
     box on;
     hold off;
-
-%%
-
-
-    
-
 end

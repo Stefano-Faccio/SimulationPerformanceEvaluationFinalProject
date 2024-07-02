@@ -45,7 +45,7 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     ylabel("Frequency(x)");
     hold off;
     
-    Gillespie_Model_Times_tail = Gillespie_Model_Times(Gillespie_Model_Times-1 >=ITERATIONS_TO_SHOW*2);
+    Gillespie_Model_Times_tail = Gillespie_Model_Times(Gillespie_Model_Times-1 >=ITERATIONS_TO_SHOW);
     nexttile(6)
     hold on;
     %histogram(residuals_1(end-length(Gillespie_Model_Times_tail):end),20, 'Normalization','pdf');

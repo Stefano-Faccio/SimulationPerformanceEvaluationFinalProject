@@ -202,6 +202,5 @@ gillespie_continuous_population =  continuous_model([CARRYING_CAPACITY GROWTH_RA
 
 %%
 compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW,iterationMean,continuous_population)
-%%
 compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model_Times, Gillespie_Model_Values, gillespie_continuous_population)
 %%
