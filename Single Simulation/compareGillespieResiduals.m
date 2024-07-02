@@ -1,6 +1,7 @@
     
 function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model_Times, Gillespie_Model_Values, gillespie_continuous_population)
     
+    figure;
     tl = tiledlayout(3,3);
     nexttile(1)
     hold on;
