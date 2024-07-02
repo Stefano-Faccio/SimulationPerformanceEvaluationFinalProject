@@ -185,24 +185,6 @@ box on;
 % Check which model between CM and DM fits better in the 95% CIs of the
 % corresponding iteraion means
 compareMeansModels(TIME, INFLECTION_TIME, iterationMean, ci95_iterationMean, ci95_iterationMean_down ,ci95_iterationMean_down, continuous_population,discrete_model_real)
-%% 
-
-% Analysis of the head, trying to remove heteroskedasticity, where normality of residuals can be tested
-% Assess the non-normality of residuals
-% consistent with the costitutive difference between discrete and
-% continuous model
-
-NRMSE_CM = goodnessOfFit(iterationMean(1:ITERATIONS_TO_SHOW)', continuous_population(1:ITERATIONS_TO_SHOW)', 'NRMSE'); %
-NRMSE_DM = goodnessOfFit(iterationMean(1:ITERATIONS_TO_SHOW)', discrete_model_real(1:ITERATIONS_TO_SHOW)', 'NRMSE'); %
-
-% Conclude that a linear or non-linear fitting is pointless? the
-% assumptions do not hold. We already have theoretical curve and possibly
-% line.
-
-%%
-
-%iterationMean = table2array(all_my_data(242,:));
-compareResidualsModels(ITERATIONS_TO_SHOW,iterationMean,continuous_population,discrete_model_real,NRMSE_CM,NRMSE_DM)
 
 %%
 % How does the constitutive difference impact stochastic simulations?
@@ -215,60 +197,11 @@ ITERATIONS_GILLEPSIE = 200000;
 
 [Gillespie_Model_Times, Gillespie_Model_Values] = gillespie(START_POPULATION, GROWTH_RATE, CARRYING_CAPACITY, CROWDING_COEFFICIENT, ITERATIONS_GILLEPSIE, NSIMULATIONS_GILLEPSIE);
 Gillespie_Model = [Gillespie_Model_Times; Gillespie_Model_Values];
-fprintf('DONE \n');
-
-%%
 
 gillespie_continuous_population =  continuous_model([CARRYING_CAPACITY GROWTH_RATE],Gillespie_Model_Times-1);
-gillespie_NRMSE_CM = goodnessOfFit(Gillespie_Model_Values', gillespie_continuous_population', 'NRMSE'); %
-Gillespie_Model_Times_Cut = Gillespie_Model_Times(Gillespie_Model_Times<= ITERATIONS_TO_SHOW);
-gillespie_NRMSE_CM_cut = goodnessOfFit(Gillespie_Model_Values(1:length(Gillespie_Model_Times_Cut))', gillespie_continuous_population(1:length(Gillespie_Model_Times_Cut))', 'NRMSE'); %
 
-
-
-figure;
-tl = tiledlayout(2,2);
-nexttile
-hold on;
-box on;
-plot(Gillespie_Model_Times-1,Gillespie_Model_Values, ".", Color="#EC3B83");
-plot(Gillespie_Model_Times-1,gillespie_continuous_population, Color="#29AB87", LineWidth=2);
-xlabel("time")
-ylabel("\mu(N_i)")
-title(["A) Big picture of the CM fitting of the"," experimental Gillepsie \mu(N_i) values"]);
-axis tight;
-hold off;
-
-nexttile
-plot(Gillespie_Model_Times-1,Gillespie_Model_Values-gillespie_continuous_population, ".",Color="#29AB87", LineWidth=1.5);
-box on;
-yline(0, '-', '\DeltaN=0',Color="#8C92AC",LineWidth=1.25);
-ylabel("\DeltaN");
-xlabel("t (time) - units");
-title(["B) Difference in population (\DeltaN) between Gillespie \mu(N_i) values"," and continuous logistic growth per time unit;"]);
-legend("CM Raw residuals", Location="southeast");
-axis tight;
-
-nexttile
-hold on;
-residuals_1 =Gillespie_Model_Values-gillespie_continuous_population;
-h1 = histogram(residuals_1(1:length(Gillespie_Model_Times_Cut)), 'Normalization','pdf',FaceColor="#29AB87");
-box on;
-title("C) CM Histogram plot of the raw residuals;","time range: [t0 - 2t* (" + ITERATIONS_TO_SHOW+")]");
-xlabel("CM Raw residuals (x)")
-ylabel("Frequency(x)");
-hold off;
-
-nexttile
-hold on;
-n1 = normplot(residuals_1(1:length(Gillespie_Model_Times_Cut)));
-props = get(n1,{'marker' 'linestyle' 'color'});
-set(n1, 'color', "#29AB87");
-legend(["x<Q1 or x> Q3","Q1<x<Q3", "x"], Location="northwest");
-xlabel("CM Raw residuals (x)")
-ylabel("Probability(x)")
-title("D) CM Normal probability plot; NRMSE: "+gillespie_NRMSE_CM_cut+";","time range: [t0 - 2t* (" + ITERATIONS_TO_SHOW+")];");
-box on;
-hold off;
-
+%%
+compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW,iterationMean,continuous_population)
+%%
+compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model_Times, Gillespie_Model_Values, gillespie_continuous_population)
 %%
