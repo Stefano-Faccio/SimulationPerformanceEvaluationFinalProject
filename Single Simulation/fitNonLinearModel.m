@@ -29,6 +29,7 @@ function [est_K, est_r, residualsStd, est_K_SE, est_r_SE, est_K_Tstat, est_r_Tst
     residualsStd = sqrt((sum(residuals.^2))/(n-2));
     rootMeanSquaredE = mdl1.RMSE;
     
+    disp(mdl1)
     disp("RSE " + residualsStd)
     
     est_K_SE = table2array(mdl1.Coefficients("b1",2)); 

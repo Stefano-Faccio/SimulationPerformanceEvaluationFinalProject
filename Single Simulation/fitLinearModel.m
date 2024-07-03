@@ -49,7 +49,7 @@ function [residualsStd,fitIntercept, fitSlope, fitInterceptCI, fitSlopeCI, fitIn
     [p,DW] = dwtest(mdl,'exact','both');
     disp("The value of the Durbin-Watson test statistic is" + DW + "The p-value is "+ p +";");
     %}
-
+    disp(mdl)
     fitIntercept = table2array(mdl.Coefficients("(Intercept)",1));
     fitSlope = table2array(mdl.Coefficients("N",1));
     fitK = - (fitIntercept / fitSlope);
