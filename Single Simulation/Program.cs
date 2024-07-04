@@ -7,12 +7,12 @@ namespace LogisticSimulation
 {
     internal class Program
     {
-        const int START_POPULATION = 50;
-        const double CROWDING_COEFFICIENT = 0.0001;
+        const int START_POPULATION = 51;
+        const double CROWDING_COEFFICIENT = 0.00001;
         const double REPRODUCTION_PROBABILITY = 0.1;
         const double DEATH_PROBABILITY = 0.05;
-        static int NSIMULATIONS = 10000;
-        static int ITERATIONS = 300;
+        static int NSIMULATIONS = 1000;
+        static int ITERATIONS = 500;
 
         static void Main(string[] args)
         {
