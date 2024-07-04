@@ -11,7 +11,7 @@ namespace LogisticSimulation
     {
         //Popolazione iniziale
         const int START_START_POPULATION = 1;
-        const int END_START_POPULATION = 50;
+        const int END_START_POPULATION = 51;
         const int STEP_START_POPULATION = 2;
         //Coefficiente di affollamento
         const decimal START_CROWDING_COEFFICIENT = 0.00001M;
