@@ -7,8 +7,8 @@ namespace MersenneTwistertest
     internal class Program
     {
         static string path = "../../../data.txt";
-        static int NSEED = 10;
-        static int NSAMPLE = 1000000;
+        static int NSEED = 100;
+        static int NSAMPLE = 100000;
         static void Main(string[] args)
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
