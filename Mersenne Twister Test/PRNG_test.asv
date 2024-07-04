@@ -37,11 +37,11 @@ dataOnly = data(2:end,:);
 % Interpretation: Measures the strength and direction of the monotonic relationship, similar to Kendall’s Tau.
 
 [rhoS, rhoSpValue] = corr(dataOnly,'Type','Spearman');
-%heatmap(rhoS)
+heatmap(rhoS)
 significantCorrS = numel(rhoS(rhoS>=0.01|rhoS<=-0.01));
-significantCorrS_ = significantCorrS-nSeed;
-disp("Spearman correlation matrix: " + significantCorrS_ + " out of " +nSeed^2 + " possible couples, excluding the main diagonal, have rs greater or equal than |0.01|")
-significantCorrPercentS = ((significantCorrS_)/(height(rhoS)*width(rhoS))) * 100;
+significantCorrS_ = significantCorrS-100;
+disp("" + significantCorrS_ + "out of " +nSeed^2 + "possible couples, excluding the main diagonal, have rs greater or equal than |0.01|")
+significantCorrPercentS = ((significantCorrS-nSeed)/(height(rhoS)*width(rhoS))) * 100;
 
 %%
 % Data points from different streams should not be correlated
@@ -55,11 +55,11 @@ significantCorrPercentS = ((significantCorrS_)/(height(rhoS)*width(rhoS))) * 100
 % with 0 indicating no linear correlation.
 
 [rhoP, rhoPpValue] = corr(dataOnly,'Type','Pearson');
-%heatmap(rhoP)
+heatmap(rhoP)
 significantCorrP = numel(rhoP(rhoP>=0.01 | rhoP<= -0.01));
-significantCorrP_ = significantCorrP-nSeed;
-disp("Pearson correlation matrix: " + significantCorrP_ + " out of " +nSeed^2 + " possible couples, excluding the main diagonal, have r greater or equal than |0.01|")
-significantCorrPercentP = ((significantCorrP_)/(height(rhoP)*width(rhoP))) * 100;
+significantCorrP_ = significantCorrP-100;
+disp("" + significantCorrP_ + "out of " +nSeed^2 + "possible couples, excluding the main diagonal, have r greater or equal than |0.01|")
+significantCorrPercentP = ((significantCorrP-nSeed)/(height(rhoP)*width(rhoP))) * 100;
 
 % Both correlation coefficient entail that there is no significant
 % correlation between each stream.
