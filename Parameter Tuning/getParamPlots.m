@@ -26,8 +26,8 @@ function  getParamPlots(tailMeanT, var, sz, label, c_start, c_step, c_end, R_sta
     figure
     hold on;
     t=tiledlayout(2,2);
-    title(t, "Evaluation of \DeltaL (%) and the system variables N_0 (initial population), R (reproduction probability), D (death probability) and c (crowding coefficient).")
-    subtitle(t,'$$\Delta L (\%) = \frac{|theoretical~L - observed~L|}{theoretical~L} \times 100;~~R=D+0.05;$$', 'interpreter', 'latex')
+    title(t, "Evaluation of \DeltaL (%) and the system variables N_0 (initial population), R (reproduction probability), D (death probability) and c (crowding coefficient).", fontsize=15)
+    subtitle(t,'$$\Delta L (\%) = \frac{|theoretical~L - observed~L|}{theoretical~L} \times 100;~~R=D+0.05;$$', 'interpreter', 'latex', fontsize=14)
     
     % 1) scatter plot of start population and \DeltaL (scaled percentage)
     % Question: does initial population have an impact on the carrying
@@ -38,7 +38,9 @@ function  getParamPlots(tailMeanT, var, sz, label, c_start, c_step, c_end, R_sta
     xlabel('N_0')
     ylabel(label)
     ytickformat('percentage')
-    title("A) Pair-wise relationship between initial population (N_0) and \DeltaL.");
+    title("A) Pair-wise relationship between initial population (N_0) and \DeltaL");
+    ax = gca;
+    fontsize(ax, scale=1.2);
     box on;
     
     % 2) boxplot of crowding coefficients and conrresponding distributions of \DeltaL
@@ -57,8 +59,10 @@ function  getParamPlots(tailMeanT, var, sz, label, c_start, c_step, c_end, R_sta
     boxplot(arrayC{:,:}, 'Labels', string(c_start:c_step:c_end), 'Symbol', '.', 'Colors', [0 0.7 0.6]);
     xlabel('c')
     ylabel(label)
+    ax = gca;
+    fontsize(ax, scale=1.2);
     ytickformat('percentage')
-    title("B) Boxplot of \DeltaL for each crowding coefficient (c) value.");
+    title("B) Boxplot of \DeltaL for each crowding coefficient (c) value");
     
     % 3) boxplot of reproduction probability and conrresponding distributions of \DeltaL
     % Question: since the difference between reproduction and death probability is kept fixed to
@@ -79,6 +83,8 @@ function  getParamPlots(tailMeanT, var, sz, label, c_start, c_step, c_end, R_sta
     xlabel('R (D+0.05)')
     ylabel(label)
     ytickformat('percentage')
+    ax = gca;
+    fontsize(ax, scale=1.2);
     title("C) Boxplot of \DeltaL for each reproduction (R) and death (D) probability values.");
 
     % 4) histogram to assess the frequency of \DeltaL values:
@@ -89,6 +95,8 @@ function  getParamPlots(tailMeanT, var, sz, label, c_start, c_step, c_end, R_sta
     xlabel(label)
     xtickformat('percentage')
     ylabel('Frequency')
+    ax = gca;
+    fontsize(ax, scale=1.2);
     title("D) Frequency distribution of \DeltaL values across all parameter settings");
     hold off;
     

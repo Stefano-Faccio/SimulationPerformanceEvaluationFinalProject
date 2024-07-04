@@ -1,9 +1,10 @@
 %%
 % We know that CARRYING_CAPACITY = (REPRODUCTION_PROBABILITY-DEATH_PROBABILITY)/CROWDING_COEFFICIENT
 % or CARRYING_CAPACITY=GROWTH_RATE/CROWDING_COEFFICIENT
-
+% for reproducibility
+rng(3,"twister");
 %colors_1 = ["#C0C0C0" "#E6194B" "#008080" "#3CB44B" "#FFE119" "#4363D8" "#F58231" "#911EB4" "#46F0F0" "#F032E6"];
-data_file_1 = '100s_500i_005r.txt';
+data_file_1 = 'data.txt';
 
 % TABLE FORMAT : simulation (given setting) x iterations' mean (over all the simulations per setting)
 
@@ -113,6 +114,18 @@ CoVLowerCICol = (CoVLowerCI)';
 CoVUpperCICol = (CoVUpperCI)';
 tailMeanT.("CoVLowerCI") = CoVLowerCICol;
 tailMeanT.("CoVUpperCI") = CoVUpperCICol;
+
+%%
+% Produce paper Supplementary table 1 (corresponding to footnote 6: 
+% 95% confidence intervals (computed with the Bootstrap method) of 5200 observed L (iteration grand mean) values,
+% for each setting, are given in Supplementary Table $1.)
+% Note that the iteration grand mean is computed on the last 200
+% iteration means.
+
+suppTable1 = tailMeanT(:,1:7);
+suppTable1.Properties.VariableNames = ["START_POPULATION","CROWDING_COEFFICIENT", "REPRODUCTION_PROBABILITY" ...
+    "DEATH_PROBABILITY", "ITERATION_GRAND_MEAN", "LOWER_95_CI", "UPPER_95_CI"];
+writetable(suppTable1,'SupplementaryTable1.csv','WriteRowNames',true);  
 
 %%
 % L is CARRYING_CAPACITY
