@@ -1,5 +1,5 @@
 %% Output analysis main
-
+% for reproducibility
 rng(1,"twister");
 
 %% Theory of the logistic growth model
@@ -49,7 +49,7 @@ compareLogGrowths(k,N_0,L,inflection_t, tmax);
 clear;
 close all;
 clc;
-
+% for reproducibility
 rng(1,"twister");
 path_header = 'header.txt';
 path_data = 'data.txt';
@@ -140,11 +140,19 @@ ci95_iterationMean = bootci(NSIMULATIONS, {@mean, table2array(all_my_data)});
 ci95_iterationMean_down = iterationMean - ci95_iterationMean(1, :);
 ci95_iterationMean_up = ci95_iterationMean(2, :) - iterationMean;
 
+%%
+suppTable2 =  table(iterationMean', ci95_iterationMean(1, :)',ci95_iterationMean(2, :)');
+writetable(suppTable2,'SupplementaryTable2.csv','WriteRowNames',true);  
+%%
+
 % Matlab built-in Bootstrap method to obtain 95% CI for each iteration
 % variance
 ci95_iterationVar = bootci(NSIMULATIONS, {@var, table2array(all_my_data)});
 ci95_iterationVar_down = iterationVar - ci95_iterationVar(1, :);
 ci95_iterationVar_up = ci95_iterationVar(2, :) - iterationVar;
+%%
+suppTable3 =  table(iterationVar', ci95_iterationVar(1, :)',ci95_iterationVar(2, :)');
+writetable(suppTable3,'SupplementaryTable3.csv','WriteRowNames',true);  
 
 %%
 % Compare iteration mean and variance with the iteration mean and
@@ -152,13 +160,15 @@ ci95_iterationVar_up = ci95_iterationVar(2, :) - iterationVar;
 
 tiledlayout(1,2)
 nexttile
+hold on;
 b1 = boxchart([iterationMean', iterationVar'],'Notch','on', 'MarkerStyle','.', 'JitterOutliers','on','BoxFaceColor', "k",'MarkerColor', "#6E7F80");
 ax = gca;
 xticklabels(ax,{"\mu(N_i)", "\sigma^2(N_i)"});
-fontsize(ax, scale=1.2);
+fontsize(ax, scale=2.4);
 xlabel(["Population (N) values"," time range: t_0 - t_{max}"])
-title("A) Box plot of iteration means \mu(N_i) and variances sigma^2(N_i)", "Long-term behaviour included")
+title(["A) Box plot of iteration means \mu(N_i)","and variances sigma^2(N_i)"], "Long-term behaviour included", FontSize= 24)
 box on;
+hold off;
 
 iterationMeanOutliers = isoutlier(iterationMean, 'quartiles');
 nMeanOutliers = histcounts(iterationMeanOutliers);
@@ -169,13 +179,15 @@ nVarOutliers = histcounts(iterationVarOutliers);
 disp("The number of outliers for the iteration variances is " + nVarOutliers(1,2) + " out of "+ ITERATIONS+ " data points: " + (nVarOutliers(1,2)/ITERATIONS).*100 + "%");
 
 nexttile
+hold on;
 b2 = boxchart([iterationMean(1:ITERATIONS_TO_SHOW)', iterationVar(1:ITERATIONS_TO_SHOW)'],'Notch','on','MarkerStyle','.', 'BoxFaceColor', "k" , 'MarkerColor', "#6E7F80");
-ax = gca;
 xticklabels(ax,{"\mu(N_i)", "\sigma^2(N_i)"});
 xlabel(["Population (N) values"," time range: t_0 - 2t*"])
-title("B) Box plot of iteration means \mu(N_i) and variances sigma^2(N_i)", "Long-term behaviour excluded")
-fontsize(ax, scale=1.2);
+ax = gca;
+fontsize(ax, scale=2.4);
+title(["B) Box plot of iteration means \mu(N_i)","and variances sigma^2(N_i)"], "Long-term behaviour excluded", FontSize= 24)
 box on;
+hold off;
 
 %%
 % Compare residuals between iteration means and continuous (CM) model

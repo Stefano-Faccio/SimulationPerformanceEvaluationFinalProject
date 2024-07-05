@@ -66,18 +66,18 @@ function [popTGrandMean,popTMean, popTVar] = plotLogIteration(T, arrayE, arrayL,
     title_="Logistic growth: simulation vs theory";
     if window==0
         subtitle_ = ["Simulations: " + nSim + ", Iterations:  " + timeCut + "; Iteration grand mean: " + round(popTGrandMean,2) + ";", ...
-        "Theoretical inflection population (N*): "+INFLECTION_POPULATION+"; Theoretical inflection time (t*): "+INFLECTION_TIME+ ";", ...
+        "Theory inflection population (N*): "+INFLECTION_POPULATION+"; Theory inflection time (t*): "+INFLECTION_TIME+ ";", ...
         "R: " + R + "; D: " + D + "; c: " +  C + "; N_0: " + N_0 + ";"];
     else
         subtitle_ = ["Moving average of population per simulation with a window of " + window + ";", ...
         "Simulations: " + nSim + ", Iterations:  " + timeCut + "; Simulation grand mean: " + round(popTGrandMean,2) + ";", ...
-        "Theoretical inflection population (N*): "+INFLECTION_POPULATION+"; Theoretical inflection time (t*): "+INFLECTION_TIME+ ";",...
+        "Theory inflection population (N*): "+INFLECTION_POPULATION+"; Theory inflection time (t*): "+INFLECTION_TIME+ ";",...
         "R: " + R + "; D: " + D + "; c: " +  C + "; N_0: " + N_0 + ";"];
     end
-    title(title_);
-    subtitle(subtitle_);
+    title(title_, fontsize=20);
+    subtitle(subtitle_, fontsize=18);
     ax = gca;
-    fontsize(ax, scale=1.6);
+    fontsize(ax, scale=1.8);
     xlim('tight');
     hold off;
     

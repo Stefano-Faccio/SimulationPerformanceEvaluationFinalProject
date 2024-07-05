@@ -16,13 +16,13 @@ function plotBarCI(title_, xlabel_, xticks_, yBar_)
     xlabel(xlabel_);
     ylabel("t (time) - iterations")
     legend(["True", "False"], Location="northwest");
-    title(title_)
+    title(title_, FontSize=8)
     set(bar1, 'FaceColor', 'Flat');
     bar1(1).CData = [0 0.5 1];  
     bar1(2).CData = [0.8 0.31 0.36]; 
     xticklabels('manual')
     ax = gca;
     xticklabels(ax,xticks_);
-    fontsize(ax, scale=1.1);
+    fontsize(ax, scale=1.9);
 
 end

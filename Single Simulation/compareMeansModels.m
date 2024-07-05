@@ -16,7 +16,7 @@ function compareMeansModels(TIME, INFLECTION_TIME, MeanArray, MeanArrayCIs, upCI
     tl = tiledlayout(2,3);
     title(tl, ["A) B) C) Comparison of CM and DM fitting of \mu(N_i) values through the analysis of raw residuals", ...
         "D) E) F) Number of model population values that (do not) fall into the corresponding \mu(N_i) 95% CIs", ...
-        "[ Population values belonging to \mu(N_i) 95% CIs: True; Otherwise: False ]"])
+        "[ Population values belonging to \mu(N_i) 95% CIs: True; Otherwise: False ]"], fontsize=24)
     
     nexttile
     hold on;
@@ -27,6 +27,8 @@ function compareMeansModels(TIME, INFLECTION_TIME, MeanArray, MeanArrayCIs, upCI
     ylabel("\mu(N_i)")
     legend ("\mu(N_i) 95% CIs", "CM: continuous model", "DM: discrete model", Location="southeast")
     title(["A) Big picture of the CM and DM fitting","of the experimental \mu(N_i) values"]);
+    ax=gca;
+    fontsize(ax, "scale", 1.7);
     hold off;
 
     nexttile
@@ -38,6 +40,8 @@ function compareMeansModels(TIME, INFLECTION_TIME, MeanArray, MeanArrayCIs, upCI
     xlabel("t (time) - units");
     title(["B) Difference in population (\DeltaN) between \mu(N_i) values"," and continuous logistic growth per time unit;"]);
     legend("CM Raw residuals", Location="southeast");
+    ax=gca;
+    fontsize(ax, "scale", 1.7);
     hold off;
 
     nexttile
@@ -49,19 +53,21 @@ function compareMeansModels(TIME, INFLECTION_TIME, MeanArray, MeanArrayCIs, upCI
     xlabel("t (time) - units");
     title(["C) Difference in population (\DeltaN) between \mu(N_i) values"," and discrete logistic growth per time unit;"]);
     legend("DM Raw residuals", Location="southeast");
+    ax=gca;
+    fontsize(ax, "scale", 1.7);
     hold off;
     
     nexttile
     plotBarCI(["D) Global comparison of the CM (continuous)","and DM (discrete) models"], ...
-            "Number of true and false population (N) values per logistic growth model", { 'CM','DM','FM', '', '','', '',}, ...
+            ["Number of true and false population (N)","values per logistic growth model"], { 'CM','DM','FM', '', '','', '',}, ...
             [trueCM, falseCM; trueDM, falseDM]);
     nexttile
     plotBarCI(["E) Comparison within the CM model;", "t* (inflection time): "+INFLECTION_TIME+";"], ...
-            "Number of true and false population (N) values per time range", {'t_{0} - t*','t* - 2t*','2t* - 3t*', '3t* - 4t*', '4t* - t_{end}', "",''}, ...
+            ["Number of true and false population (N)","values per time range"], {'t_{0} - t*','t* - 2t*','2t* - 3t*', '3t* - 4t*', '4t* - t_{end}', "",''}, ...
             stat_rangesCM');
     nexttile
     plotBarCI(["F) Comparison within the DM model;", "t* (inflection time): "+INFLECTION_TIME+";" ], ...
-            "Number of true and false population (N) values per time range", {'t_{0} - t*','t* - 2t*','2t* - 3t*', '3t* - 4t*', '4t* - t_{end}',"", ''}, ...
+            ["Number of true and false population (N)","values per time range"], {'t_{0} - t*','t* - 2t*','2t* - 3t*', '3t* - 4t*', '4t* - t_{end}',"", ''}, ...
             stat_rangesDM');
     hold off;
 end

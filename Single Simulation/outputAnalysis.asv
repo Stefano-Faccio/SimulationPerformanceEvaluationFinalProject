@@ -1,5 +1,5 @@
 %% Output analysis main
-
+% for reproducibility
 rng(1,"twister");
 
 %% Theory of the logistic growth model
@@ -49,7 +49,7 @@ compareLogGrowths(k,N_0,L,inflection_t, tmax);
 clear;
 close all;
 clc;
-
+% for reproducibility
 rng(1,"twister");
 path_header = 'header.txt';
 path_data = 'data.txt';
@@ -140,6 +140,8 @@ ci95_iterationMean = bootci(NSIMULATIONS, {@mean, table2array(all_my_data)});
 ci95_iterationMean_down = iterationMean - ci95_iterationMean(1, :);
 ci95_iterationMean_up = ci95_iterationMean(2, :) - iterationMean;
 
+suppTable
+
 % Matlab built-in Bootstrap method to obtain 95% CI for each iteration
 % variance
 ci95_iterationVar = bootci(NSIMULATIONS, {@var, table2array(all_my_data)});
@@ -204,9 +206,9 @@ gillespie_continuous_population =  continuous_model([CARRYING_CAPACITY GROWTH_RA
 compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW,iterationMean,continuous_population)
 compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model_Times, Gillespie_Model_Values, gillespie_continuous_population)
 %%
-% Extra linear model fitting
- [residualsStd,fitIntercept, fitSlope, fitInterceptCI, fitSlopeCI, fitInterceptSE, fitSlopeSE, fitInterceptTstat, fitSlopeTstat, fitSlopePvalue] = fitLinearModel(iterationMean, iterationMean, GROWTH_RATE, CARRYING_CAPACITY, ITERATIONS_TO_SHOW);
+% Extra linear model fitting (optional)
+ [residualsStd,fitIntercept, fitSlope, fitInterceptCI, fitSlopeCI, fitInterceptSE, fitSlopeSE, fitInterceptTstat, fitSlopeTstat, fitSlopePvalue] = fitLinearModel(iterationMean, TIME, GROWTH_RATE, CARRYING_CAPACITY, ITERATIONS_TO_SHOW);
 %%
-% Extra non-linear model fitting (CLEARLY SOME)
-[est_K, est_r, residualsStd, est_K_SE, est_r_SE, est_K_Tstat, est_r_Tstat, est_K_pValue , est_r_pValue,est_K_CI, est_r_CI  ] = fitNonLinearModel(iterationMean, iterationMean, GROWTH_RATE, CARRYING_CAPACITY, START_POPULATION, continuous_population, ITERATIONS_TO_SHOW);
+% Extra non-linear model fitting (and why it is wrong to perform it)
+[est_K, est_r, residualsStd, est_K_SE, est_r_SE, est_K_Tstat, est_r_Tstat, est_K_pValue , est_r_pValue,est_K_CI, est_r_CI  ] = fitNonLinearModel(iterationMean, TIME, GROWTH_RATE, CARRYING_CAPACITY, START_POPULATION, continuous_population, ITERATIONS_TO_SHOW);
 %%

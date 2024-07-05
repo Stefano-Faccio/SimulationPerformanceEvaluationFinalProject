@@ -6,13 +6,10 @@ function compareLogFittedGrowths(TIME, continuous_population, discrete_model_rea
 
 
 tl= tiledlayout(2,1);
-title(tl,"Theoretical logistic growth models");
+title(tl,"Theoretical logistic growth models", fontsize=26);
 subtitle_ = ["Discrete = continuous growth rate (r = k): " + GROWTH_RATE + "; Carrying capacity (L): "+ CARRYING_CAPACITY + ";", ...
     "Initial population (N_0): " + START_POPULATION + "; Time range: [" + 0 + " - " + TIME(end) + "]; Inflection time (t*): " + INFLECTION_TIME + ";"];
-subtitle(tl,subtitle_);
-
-
-%fontsize(tl, scale=1.4);
+subtitle(tl,subtitle_, fontsize=24);
 
 nexttile
 hold on;
@@ -24,10 +21,9 @@ title(leg,'Logistic growth models')
 ylabel("N (population) - units");
 xlabel("t (time) - units");
 title("A) Big picture of the comparison between continuous (CM) and discrete (DM) logistic growth models");
-
 box on;
-%ax = gca;
-%fontsize(ax, scale=1.4);
+ax = gca;
+fontsize(ax, scale=2.1);
 hold off;
 
 nexttile
@@ -37,6 +33,8 @@ box on;
 yline(0, '-', '\DeltaN=0', Color="#8C92AC",LineWidth=1.25);
 ylabel("\DeltaN");
 xlabel("t (time) - units");
+ax = gca;
+fontsize(ax, scale=2.1);
 title("B) Difference in population (\DeltaN) between DM and CM per time unit");
 legend("Raw residuals", Location="southeast")
 hold off;

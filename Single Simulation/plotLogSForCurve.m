@@ -72,7 +72,9 @@ function plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,string)
 
     elseif string=="curve"
         title("Logistic growth model");
-        subtitle_ = [" (The exponential growth model is displayed as a reference)","N_0 (initial population): " + N_0 + "; N_{max} (maximum population at time t="+ tmax+ "): " + round(maxN_t,2)+ "; c (crowding coefficient): " + C + "; k (continuous growth rate): " + k + ";", ...
+        subtitle_ = [" (The exponential growth model is displayed as a reference)", ... 
+            "N_0 (initial population): " + N_0 + "; N_{max} (maximum population at time t="+ tmax+ "): " + round(maxN_t,2)+ ";",  ...
+            "c (crowding coefficient): " + C + "; k (continuous growth rate): " + k + ";", ...
             "L (carrying capacity): " + L+"; L/2 (inflection population): " + L/2 + "; t* (inflection time): " + round(inflection_t,2)+";"]; 
     end
     subtitle(subtitle_);
@@ -82,8 +84,8 @@ function plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,string)
     ylim([Nmin Nmax]);
     ax = gca;
     ax.TitleHorizontalAlignment="center";
-    fontsize(ax, scale=1.4);
-    leg= legend([p1 p2], "Logistic", "Exponential");
+    fontsize(ax, scale=2.0);
+    leg= legend([p1 p2], "Logistic", "Exponential", Location="southwest");
     title(leg, 'Growth curve');
     hold off;
 end

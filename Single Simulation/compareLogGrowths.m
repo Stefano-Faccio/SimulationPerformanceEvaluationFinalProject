@@ -63,7 +63,7 @@ function compareLogGrowths(k,N_0,L,inflection_t, tmax)
     figure;
     tl= tiledlayout(2,2);
     title(tl,["Comparison of continuous and discrete logistic growth in subsequent time frames", "[Discrete = continuous growth rate (r = k): " + k+"; Initial population (N_0): " + N_0 + "; Carrying capacity (L): "+ L+"]"]);
-    fontsize(tl, scale=1.4);
+    fontsize(tl, scale=2);
     
     nexttile
     hold on;
@@ -79,7 +79,7 @@ function compareLogGrowths(k,N_0,L,inflection_t, tmax)
     leg.Location="northwest";
     box on;
     ax = gca;
-    fontsize(ax, scale=1.4);
+    fontsize(ax, scale=2.2);
     hold off;
 
     nexttile
@@ -93,7 +93,7 @@ function compareLogGrowths(k,N_0,L,inflection_t, tmax)
     xlabel("t (time) - units");
     box on;
     ax = gca;
-    fontsize(ax, scale=1.4);
+    fontsize(ax, scale=2.2);
     hold off;
 
     nexttile
@@ -107,7 +107,7 @@ function compareLogGrowths(k,N_0,L,inflection_t, tmax)
     xlabel("t (time) - units");
     box on;
     ax = gca;
-    fontsize(ax, scale=1.4);
+    fontsize(ax, scale=2.2);
     hold off;
 
     nexttile
@@ -120,7 +120,7 @@ function compareLogGrowths(k,N_0,L,inflection_t, tmax)
     ylabel("N (population) - units");
     xlabel("t (time) - units");
     ax = gca;
-    fontsize(ax, scale=1.4);
+    fontsize(ax, scale=2.2);
     box on;
     hold off;
     
