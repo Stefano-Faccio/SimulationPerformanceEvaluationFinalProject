@@ -217,8 +217,8 @@ compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW,iterationMean,continuous_populati
 compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model_Times, Gillespie_Model_Values, gillespie_continuous_population)
 %%
 % Extra linear model fitting (optional)
- [residualsStd,fitIntercept, fitSlope, fitInterceptCI, fitSlopeCI, fitInterceptSE, fitSlopeSE, fitInterceptTstat, fitSlopeTstat, fitSlopePvalue] = fitLinearModel(iterationMean, TIME, GROWTH_RATE, CARRYING_CAPACITY, ITERATIONS_TO_SHOW);
+ %[residualsStd,fitIntercept, fitSlope, fitInterceptCI, fitSlopeCI, fitInterceptSE, fitSlopeSE, fitInterceptTstat, fitSlopeTstat, fitSlopePvalue] = fitLinearModel(iterationMean, TIME, GROWTH_RATE, CARRYING_CAPACITY, ITERATIONS_TO_SHOW);
 %%
 % Extra non-linear model fitting (and why it is wrong to perform it)
-[est_K, est_r, residualsStd, est_K_SE, est_r_SE, est_K_Tstat, est_r_Tstat, est_K_pValue , est_r_pValue,est_K_CI, est_r_CI  ] = fitNonLinearModel(iterationMean, TIME, GROWTH_RATE, CARRYING_CAPACITY, START_POPULATION, continuous_population, ITERATIONS_TO_SHOW);
+%[est_K, est_r, residualsStd, est_K_SE, est_r_SE, est_K_Tstat, est_r_Tstat, est_K_pValue , est_r_pValue,est_K_CI, est_r_CI  ] = fitNonLinearModel(iterationMean, TIME, GROWTH_RATE, CARRYING_CAPACITY, START_POPULATION, continuous_population, ITERATIONS_TO_SHOW);
 %%

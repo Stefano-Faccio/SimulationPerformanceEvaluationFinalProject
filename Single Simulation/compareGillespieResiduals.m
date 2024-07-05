@@ -3,6 +3,7 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     
     figure;
     tl = tiledlayout(3,3);
+    
     nexttile(1)
     hold on;
     box on;
@@ -11,18 +12,26 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     xlabel("time")
     ylabel("\mu(N_i)")
     title(["1) Big picture of the CM fitting of the"," experimental Gillepsie \mu(N_i) values"]);
+    %title("1)", FontSize=15);
+    ax= gca;
+    fontsize(ax, "scale", 1.25)
     axis tight;
     hold off;
 
     nexttile(2)
+    hold on;
     plot(Gillespie_Model_Times-1,Gillespie_Model_Values-gillespie_continuous_population, ".",Color="#29AB87", LineWidth=1.5);
     box on;
     yline(0, '-', '\DeltaN=0',Color="#8C92AC",LineWidth=1.25);
     ylabel("\DeltaN");
     xlabel("t (time) - units");
-    title(["2) Difference in population (\DeltaN) between Gillespie \mu(N_i) values"," and continuous logistic growth per time unit;"]);
+    title(["2) Difference in population (\DeltaN) between Gillespie","\mu(N_i) values and CM growth per time unit;"]);
+    %title("2)", FontSize=15);
     legend("CM Raw residuals", Location="southeast");
     axis tight;
+    ax= gca;
+    fontsize(ax, "scale", 1.25);
+    hold off;
 
     
     Gillespie_Model_Times_Head = Gillespie_Model_Times(Gillespie_Model_Times-1<= ITERATIONS_TO_SHOW);
@@ -33,8 +42,11 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     %disp(length(Gillespie_Model_Times_Head));
     box on;
     title(["A.1) CM Histogram plot of the head ","(short-term) raw residuals;"],"time range: [t_0 - 2t* (~"+ITERATIONS_TO_SHOW+")]");
+    %title("A.1)", FontSize=15);
     xlabel("CM Raw residuals (x)")
     ylabel("Frequency(x)");
+    ax= gca;
+    fontsize(ax, "scale", 1.25);
     hold off;
 
     nexttile(5)
@@ -42,8 +54,11 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     histogram(residuals_1, 20, 'Normalization','pdf',FaceColor="#29AB87");
     box on;
     title(["B.1) CM Histogram plot of the head+tail ","(long-term) raw residuals;"],"time range: [t_0 - t_{max} (~"+ITERATIONS+")]");
+    %title("B.1)", FontSize=15);
     xlabel("CM Raw residuals (x)")
     ylabel("Frequency(x)");
+    ax= gca;
+    fontsize(ax, "scale", 1.25);
     hold off;
     
     Gillespie_Model_Times_tail = Gillespie_Model_Times(Gillespie_Model_Times-1 >=ITERATIONS_TO_SHOW);
@@ -56,8 +71,11 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     h3(1).FaceColor = "#009E60";
     box on;
     title(["C.1) CM Histogram plot of the tail ","(steady-state only) raw residuals;"],"time range: [2t* - t_{max}]");
+    %title("C.1)", FontSize=15);
     xlabel("CM Raw residuals (x)")
     ylabel("Frequency(x)");
+    ax= gca;
+    fontsize(ax, "scale", 1.25);
     hold off;
 
 
@@ -71,7 +89,10 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     xlabel("CM Raw residuals (x)")
     ylabel("Probability(x)")
     title("A.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [t_0 - 2t* (~"+ITERATIONS_TO_SHOW+")];"]);
+    %title("A.2)", FontSize=15);
     box on;
+    ax= gca;
+    fontsize(ax, "scale", 1.15);
     hold off;
 
     
@@ -85,7 +106,10 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     xlabel("CM Raw residuals (x)")
     ylabel("Probability(x)")
     title("B.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [t_0 - t_{max} (~"+ITERATIONS+")];"]);
+    %title("B.2)", FontSize=15);
     box on;
+    ax= gca;
+    fontsize(ax, "scale", 1.15);
     hold off;
     
     NRMSE_CM = goodnessOfFit(Gillespie_Model_Values(end-length(Gillespie_Model_Times_tail):end)', gillespie_continuous_population(end-length(Gillespie_Model_Times_tail):end)', 'NRMSE'); %
@@ -98,7 +122,10 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     xlabel("CM Raw residuals (x)")
     ylabel("Probability(x)")
     title("C.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [2t* - t_{max}];"]);
+    %title("C.2)", FontSize=15);
     box on;
+    ax= gca;
+    fontsize(ax, "scale", 1.15);
     hold off;
 
 

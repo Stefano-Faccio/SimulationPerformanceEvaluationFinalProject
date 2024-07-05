@@ -13,8 +13,8 @@ function compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW, MeanArray, CM)
     residuals_1 = MeanArray-CM;
     histogram(residuals_1(1:ITERATIONS_TO_SHOW), 20, 'Normalization','pdf', FaceColor="#87A96B");
     box on;
-    title(["A.1) CM Histogram plot of the head ","(short-term) raw residuals;"],"time range: [t_0 - 2t* ("+ITERATIONS_TO_SHOW+")]");
-    %title("A.1)", FontSize=15);
+    %title(["A.1) CM Histogram plot of the head ","(short-term) raw residuals;"],"time range: [t_0 - 2t* ("+ITERATIONS_TO_SHOW+")]");
+    title("A.1)", FontSize=15);
     xlabel("CM Raw residuals (x)")
     ylabel("Frequency(x)");
     ax=gca;
@@ -25,8 +25,8 @@ function compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW, MeanArray, CM)
     hold on;
     histogram(residuals_1, 20, 'Normalization','pdf', FaceColor="#29AB87");
     box on;
-    title(["B.1) CM Histogram plot of the head+tail ","(long-term) raw residuals;"],"time range: [t_0 - t_{max} ("+ITERATIONS+")]");
-    %title("B.1)", FontSize=15);
+    %title(["B.1) CM Histogram plot of the head+tail ","(long-term) raw residuals;"],"time range: [t_0 - t_{max} ("+ITERATIONS+")]");
+    title("B.1)", FontSize=15);
     xlabel("CM Raw residuals (x)")
     ylabel("Frequency(x)");
     ax=gca;
@@ -40,8 +40,8 @@ function compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW, MeanArray, CM)
     h3(2).Color = [.2 .2 .2];
     h3(1).FaceColor ="#009E60";
     box on;
-    title(["C.1) CM Histogram plot of the tail ","(steady-state only) raw residuals;"],"time range: [2t* - t_{max}]");
-    %title("C.1)", FontSize=15);
+    %title(["C.1) CM Histogram plot of the tail ","(steady-state only) raw residuals;"],"time range: [2t* - t_{max}]");
+    title("C.1)", FontSize=15);
     xlabel("CM Raw residuals (x)")
     ylabel("Frequency(x)");
     ax=gca;
@@ -57,8 +57,8 @@ function compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW, MeanArray, CM)
     NRMSE_CM = goodnessOfFit(MeanArray(1:ITERATIONS_TO_SHOW)', CM(1:ITERATIONS_TO_SHOW)', 'NRMSE'); %
     xlabel("CM Raw residuals (x)")
     ylabel("Probability(x)")
-    title("A.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [t_0 - 2t* ("+ITERATIONS_TO_SHOW+")];"]);
-    %title("A.2)", FontSize=15);
+    %title("A.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [t_0 - 2t* ("+ITERATIONS_TO_SHOW+")];"]);
+    title("A.2)", FontSize=10);
     box on;
     ax=gca;
     fontsize(ax, "scale", 1.5);
@@ -73,8 +73,8 @@ function compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW, MeanArray, CM)
     NRMSE_CM = goodnessOfFit(MeanArray', CM', 'NRMSE'); %
     xlabel("CM Raw residuals (x)")
     ylabel("Probability(x)")
-    title("B.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [t_0 - t_{max} ("+ITERATIONS+")];"]);
-    %title("B.2)", FontSize=15);
+    %title("B.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [t_0 - t_{max} ("+ITERATIONS+")];"]);
+    title("B.2)", FontSize=10);
     box on;
     ax=gca;
     fontsize(ax, "scale", 1.5);
@@ -89,8 +89,8 @@ function compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW, MeanArray, CM)
     NRMSE_CM = goodnessOfFit(MeanArray(ITERATIONS_TO_SHOW:end)', CM(ITERATIONS_TO_SHOW:end)', 'NRMSE'); %
     xlabel("CM Raw residuals (x)")
     ylabel("Probability(x)")
-    title("C.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [2t* - t_{max}];"]);
-    %title("C.2)", FontSize=15);
+    %title("C.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [2t* - t_{max}];"]);
+    title("C.2)", FontSize=10);
     box on;
     ax=gca;
     fontsize(ax, "scale", 1.5);
