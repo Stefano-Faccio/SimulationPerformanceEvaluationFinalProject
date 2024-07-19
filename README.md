@@ -6,4 +6,4 @@ Check the **wiki** for a description of the project and a guide on parameter set
 
 ## Camilla Pelagalli and Stefano Faccio
 
-![image](island.pdf)
+![image](island.png)
