@@ -222,26 +222,44 @@ compareLogFittedGrowths(TIME, continuous_population, discrete_model_real, GROWTH
 
 %%
 
-% How does the constitutive difference impact stochastic simulations?
+% How does the constitutive difference between continuous and discrete model impact stochastic simulations?
 % Is our simulation the only one that behaves like this?
 % Let us implement the state of the art Gillespie algorithm for logistic
 % growth simulation
 
 NSIMULATIONS_GILLEPSIE = 1000;
+% The number of iterations was manually tuned to match our stochastic
+% simulation long-term behaviour
 ITERATIONS_GILLEPSIE = 200000;
 
 [Gillespie_Model_Times, Gillespie_Model_Values] = gillespie(START_POPULATION, GROWTH_RATE, CARRYING_CAPACITY, CROWDING_COEFFICIENT, ITERATIONS_GILLEPSIE, NSIMULATIONS_GILLEPSIE);
 Gillespie_Model = [Gillespie_Model_Times; Gillespie_Model_Values];
 
+% we can compare gillespie simulation output only with the continuous
+% model, knowing that gillespie time starts at 1 and CM at 0
 gillespie_continuous_population =  continuous_model([CARRYING_CAPACITY GROWTH_RATE],Gillespie_Model_Times-1);
 
 %%
+% we now check if residuals are normally distributed in both our simulation
+% and gillespie (compared with the continuous model)
+% and check if heteroskedasticity is also present in the gillepsie
+% simulation and to what extent
+% is there a best simulation approach?
 compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW,iterationMean,continuous_population)
 compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model_Times, Gillespie_Model_Values, gillespie_continuous_population)
+
+% Gillespie residuals have a smaller minimum
+% and their distribution is closer to normal
+
+% time is important
+% mutual exclusiveness is important
+
 %%
 % Extra linear model fitting (optional)
- %[residualsStd,fitIntercept, fitSlope, fitInterceptCI, fitSlopeCI, fitInterceptSE, fitSlopeSE, fitInterceptTstat, fitSlopeTstat, fitSlopePvalue] = fitLinearModel(iterationMean, TIME, GROWTH_RATE, CARRYING_CAPACITY, ITERATIONS_TO_SHOW);
+%[residualsStd,fitIntercept, fitSlope, fitInterceptCI, fitSlopeCI, fitInterceptSE, fitSlopeSE, fitInterceptTstat, fitSlopeTstat, fitSlopePvalue] = fitLinearModel(iterationMean, TIME, GROWTH_RATE, CARRYING_CAPACITY, ITERATIONS_TO_SHOW);
 %%
-% Extra non-linear model fitting (and why it is wrong to perform it)
+% Extra non-linear model fitting (legacy) -  we already have a fit to the
+% theoretical model, it is our iteraion means, this is our experimental fit
+% to compare with the continuous model
 %[est_K, est_r, residualsStd, est_K_SE, est_r_SE, est_K_Tstat, est_r_Tstat, est_K_pValue , est_r_pValue,est_K_CI, est_r_CI  ] = fitNonLinearModel(iterationMean, TIME, GROWTH_RATE, CARRYING_CAPACITY, START_POPULATION, continuous_population, ITERATIONS_TO_SHOW);
 %%

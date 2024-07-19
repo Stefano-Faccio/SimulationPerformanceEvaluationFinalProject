@@ -1,7 +1,19 @@
+% This function is legacy and takes the following input arguments:
+% 1) pickedSimArr, or iteration means
+% 2) t, TIME
+% 3) r, GROWTH_RATE
+% 4) K, CARRYING_CAPACITY
+% 5) iterCut, or ITERATIONS_TO_SHOW (up to 2t*)
+
+
+% This function outputs information relative to the fitted linear model,
+% especially estimated growth rate (intercept)
+% and estimated -crowding coefficient (slope)
+% along with plots for visual assessment of the fit and the residuals.
 function [residualsStd,fitIntercept, fitSlope, fitInterceptCI, fitSlopeCI, fitInterceptSE, fitSlopeSE, fitInterceptTstat, fitSlopeTstat, fitSlopePvalue, mdl] = fitLinearModel(pickedSimArr, t, r, K, iterCut)
     
     tableTN = [t(1:iterCut);pickedSimArr(1:iterCut)]';
-    dist=2; %attenz (prima 2)
+    dist=2;
     
     W = [];
     X = [];
@@ -10,7 +22,7 @@ function [residualsStd,fitIntercept, fitSlope, fitInterceptCI, fitSlopeCI, fitIn
     if rem(iterCut,2) == 0
         stop = iterCut-(2*dist);
     else
-        stop = iterCut-(2*dist)-1; %attenz (prima 1)
+        stop = iterCut-(2*dist)-1;
     end
 
    

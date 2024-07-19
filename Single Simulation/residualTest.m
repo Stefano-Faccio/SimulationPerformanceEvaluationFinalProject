@@ -1,4 +1,6 @@
-    
+% This function is legacy.
+% Given the fitted model,
+% it performs a complete analysis of the residuals
 function residualTest(mdl,residuals)
     % Residuals are useful for detecting outlying y values and checking the linear regression assumptions with respect to the error term in the regression model. 
     % High-leverage observations have smaller residuals because they often shift the regression line or surface closer to them. 

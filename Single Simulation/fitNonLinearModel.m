@@ -1,3 +1,16 @@
+% This function is legacy and takes the following input arguments:
+% 1) pickedSimArr, or iteration means
+% 2) t, TIME
+% 3) r, GROWTH_RATE
+% 4) K, CARRYING_CAPACITY
+% 5) N_0, START_POPULATION
+% 6) N_t, continuous model population values
+% 7) iterCut, or ITERATIONS_TO_SHOW (up to 2t*)
+
+% This function outputs information/plots about the non-linear fit and the
+% residuals
+% especially estimated growth rate and carrying capacity
+
 function [est_K, est_r, residualsStd, est_K_SE, est_r_SE, est_K_Tstat, est_r_Tstat, est_K_pValue , est_r_pValue, est_K_CI, est_r_CI  ] = fitNonLinearModel(pickedSimArr, t, r, K, N_0, N_t, iterCut)
     
     modelfun = @(b,x) (b(1) * N_0) ./ ( (b(1) - N_0) .* exp((-b(2)) .* x) + N_0 );
