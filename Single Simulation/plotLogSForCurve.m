@@ -15,7 +15,7 @@
 
 function plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,string)
     
-    % grid preparation (for phase plot)
+    % grid preparation (for slope field)
     [t,N]=meshgrid(0:1:tmax,Nmin:1:Nmax);
     L = k/C;
     dN = k*N-C*N.^2;
@@ -23,7 +23,7 @@ function plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,string)
     
     % Theoretical logistic equation
     logisticEquation = @(u,y)(C.* y(1) .* (L - y(1)));
-    % method 1: matlab built-in function ode45 to get logistic function
+    % method 1: matlab built-in function ode45 to get logistic function (for slope field)
     [u, y] = ode45(logisticEquation, [0 tmax], N_0);
 
     % Theoretical logistic function
@@ -32,7 +32,6 @@ function plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,string)
     % Theoretical exponential function
     N_te = N_0*exp(k.*ti);
 
-    
     figure;
     hold on;
     if string=="curve"
@@ -40,7 +39,6 @@ function plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,string)
         % quiver(t,N,dt,dN, Color = "#FFFFFF");
         p1 = plot(ti, N_tl, "k",LineWidth=1.5);
         p2 = plot(ti, N_te, LineWidth=1.5, Color="#8C92AC");
-        
         
     elseif string=="sf"
         % make grid visible
@@ -77,15 +75,21 @@ function plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,string)
             "c (crowding coefficient): " + C + "; k (continuous growth rate): " + k + ";", ...
             "L (carrying capacity): " + L+"; L/2 (inflection population): " + L/2 + "; t* (inflection time): " + round(inflection_t,2)+";"]; 
     end
+
     subtitle(subtitle_);
-    
     axis tight;
     box on;
     ylim([Nmin Nmax]);
     ax = gca;
     ax.TitleHorizontalAlignment="center";
+
+    if string=="sf"
+    elseif string=="curve"
+        leg= legend([p1 p2], "Logistic", "Exponential",Location="southwest");
+        title(leg, 'Growth curve');
+    end
+
     fontsize(ax, scale=2.0);
-    leg= legend([p1 p2], "Logistic", "Exponential", Location="southwest");
-    title(leg, 'Growth curve');
     hold off;
+    
 end

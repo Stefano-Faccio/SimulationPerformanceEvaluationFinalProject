@@ -1,3 +1,11 @@
+% This function takes as input the following arguments:
+% 1) title_ (chages upon population model)
+% 2) xlabel_ (for each stacked bar plot)
+% 3) xticks_  (for each stacked bar per time frame)
+% 4) yBar_ (true/false values to build each stacked bar per time frame)
+
+% This function outputs a multiple stacked bar plot
+
 function plotBarCI(title_, xlabel_, xticks_, yBar_)
     
     box on;
@@ -20,7 +28,7 @@ function plotBarCI(title_, xlabel_, xticks_, yBar_)
     set(bar1, 'FaceColor', 'Flat');
     bar1(1).CData = [0 0.5 1];  
     bar1(2).CData = [0.8 0.31 0.36]; 
-    xticklabels('manual')
+    xticklabels('manual');
     ax = gca;
     xticklabels(ax,xticks_);
     fontsize(ax, scale=1.9);
