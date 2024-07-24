@@ -88,6 +88,7 @@ function [Gillespie_Model_Times, Gillespie_Model_Values] = Compute_Multiple_Simu
 
     % Compute iteration means and time "points"
     % code adapted from: https://www.rpgroup.caltech.edu/ncbs_pboc/code/t06_gillespie_algorithm.html
+    % N.B. parfor is a parallel for loop, it is faster than a for loop
     parfor i = 1:ITERATIONS_GILLEPSIE
         % iterations are the same, so to obtain the average population
         % values, sum all the population values corresponding to iteration
@@ -125,7 +126,7 @@ function [Time, Dt, Population] = Execute_Gillespie_Algorithm(START_POPULATION, 
     Time(1) = 1; % initial time is 1
     Dt = zeros(1, ITERATIONS);
     Dt(1) = 1; % so tau is 1
-    % draw a random number from the uniform distribution
+    % draw multiple random numbers from the uniform distribution
     random_numbers = rand(1, ITERATIONS);
 
     for i = 2:ITERATIONS
