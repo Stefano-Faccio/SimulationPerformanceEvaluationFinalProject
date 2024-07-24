@@ -163,7 +163,7 @@ ax = gca;
 xticklabels(ax,{"\mu(N_i)", "\sigma^2(N_i)"});
 fontsize(ax, scale=2.4);
 xlabel(["Population (N) values"," time range: t_0 - t_{max}"])
-title(["A) Box plot of iteration means \mu(N_i)","and variances sigma^2(N_i)"], "Long-term behaviour included", FontSize= 24)
+title(["A) Box plot of iteration means \mu(N_i)","and variances \sigma^2(N_i)"], "Long-term behaviour included", FontSize= 24)
 box on;
 hold off;
 
@@ -183,11 +183,11 @@ disp("The number of outliers for the iteration variances is " + nVarOutliers(1,2
 nexttile
 hold on;
 b2 = boxchart([iterationMean(1:ITERATIONS_TO_SHOW)', iterationVar(1:ITERATIONS_TO_SHOW)'],'Notch','on','MarkerStyle','.', 'BoxFaceColor', "k" , 'MarkerColor', "#6E7F80");
-xticklabels(ax,{"\mu(N_i)", "\sigma^2(N_i)"});
+ax1=gca;
+xticklabels(ax1,{"\mu(N_i)", "\sigma^2(N_i)"});
+fontsize(ax1, scale=2.4);
 xlabel(["Population (N) values"," time range: t_0 - 2t*"])
-ax = gca;
-fontsize(ax, scale=2.4);
-title(["B) Box plot of iteration means \mu(N_i)","and variances sigma^2(N_i)"], "Long-term behaviour excluded", FontSize= 24)
+title(["B) Box plot of iteration means \mu(N_i)","and variances \sigma^2(N_i)"], "Long-term behaviour excluded", FontSize= 24)
 box on;
 hold off;
 % The number of outliers for the iteration means is 0 out of 184 data
