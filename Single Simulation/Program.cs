@@ -7,6 +7,7 @@ namespace LogisticSimulation
 {
     internal class Program
     {
+        //Simulation settings parameters
         const int START_POPULATION = 51;
         const double CROWDING_COEFFICIENT = 0.00001;
         const double REPRODUCTION_PROBABILITY = 0.1;
@@ -16,25 +17,19 @@ namespace LogisticSimulation
 
         static void Main(string[] args)
         {
-            //Settaggi iniziali
+            //Initial setup
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture; // Decimal numbers are printed with dot and not comma
-            string path_data = "../../../data.txt";
-            string path_header = "../../../header.txt";
-            //if it is not a win environment i change the path_data where i save the data
-            if (!Environment.OSVersion.Platform.ToString().Trim().ToLower().Contains("win"))
-            {
-                path_data = "data.txt";
-                path_header = "header.txt";
-            }
+            string path_data = "data.txt";
+            string path_header = "header.txt";
 
             //----------------------//
 
-            //Simulazioni
+            //Run the simulations
             string[] results = MultipleSimulations();
 
             //----------------------//
 
-            //Scrivo a file
+            //Write the results to file
             File.Delete(path_header);
             File.Delete(path_data);
 
@@ -51,22 +46,25 @@ namespace LogisticSimulation
             file_data.Close();
         }
 
+        //Multiple runs of the simulation
         static string[] MultipleSimulations()
         {
             string[] _results = new string[NSIMULATIONS];
             List<short> simulationInfo = new(new short[ITERATIONS + 1]);
 
+            //For each simulation run
             for (int i = 0; i < NSIMULATIONS; i++)
             {
+                //New simulation instance with next seed
                 Simulation sim = new(START_POPULATION, REPRODUCTION_PROBABILITY, DEATH_PROBABILITY, CROWDING_COEFFICIENT, Prime.GetNextPrime());
-
+                //Execute the simulation
                 simulationInfo[0] = START_POPULATION;
                 for (int j = 1; j < ITERATIONS + 1; j++)
                     simulationInfo[j] = sim.NextIteration();
-
+                //Save the results
                 _results[i] = String.Join(" ", simulationInfo);
             }
-
+    
             Console.WriteLine("Done");
             return _results;
         }

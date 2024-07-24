@@ -9,32 +9,31 @@ namespace LogisticSimulation
 {
     internal class Program
     {
-        //Popolazione iniziale
+        //Initial population
         const int START_START_POPULATION = 1;
         const int END_START_POPULATION = 51;
         const int STEP_START_POPULATION = 2;
-        //Coefficiente di affollamento
+        //Crowding coefficient
         const decimal START_CROWDING_COEFFICIENT = 0.00001M;
         const decimal END_CROWDING_COEFFICIENT = 0.0001M;
         const decimal STEP_CROWDING_COEFFICIENT = 0.00001M;
-        //Probabilità di riproduzione
+        //Reproduction and death probability
         const decimal START_REPRODUCTION_PROBABILITY = 0.05M;
         const decimal END_REPRODUCTION_PROBABILITY = 1M;
         const decimal STEP_REPRODUCTION_PROBABILITY = 0.05M;
-
+        //Number of simulations and iterations
         static int NSIMULATIONS = 100;
         static int ITERATIONS = 500;
+        //Growth rate
         static decimal R_D = 0.05M;
 
         static void Main(string[] args)
         {
-            //Settaggi iniziali
+            //Initial setup
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture; // Decimal numbers are printed with dot and not comma
-            string path = "../../../data.txt";
-            //if it is not a win environment i change the path where i save the data
-            if (!Environment.OSVersion.Platform.ToString().Trim().ToLower().Contains("win"))
-                path = "data.txt";
-            //Argomenti riga comando
+            string path = "data.txt";
+
+            //Check if the user has passed command line arguments
             if (args.Length == 3)
             {
                 try
@@ -56,7 +55,7 @@ namespace LogisticSimulation
 
             //----------------------//
 
-            //Valori delle simulazioni
+            //Initialization of the lists with start populations, crowding coefficients, reproduction and death probabilities
             List<int> startPopulations = new();
             for (int value = START_START_POPULATION; value <= END_START_POPULATION; value += STEP_START_POPULATION)
                 startPopulations.Add(value);
@@ -74,8 +73,7 @@ namespace LogisticSimulation
             }
             string[,,] results = new string[startPopulations.Count, crowdingCoefficients.Count, reproductionProbabilities.Count];
 
-
-            //Console.WriteLine("Working");
+            //Print the progress bar to the console
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("[");
             for (int i = 0; i < startPopulations.Count; i++)
@@ -89,14 +87,15 @@ namespace LogisticSimulation
             Console.WriteLine("]");
             Console.ResetColor();
             Console.Write("[");
-            //Eseguo le simulazioni
+            
+            //Run the simulations
             MultipleSimulations(startPopulations, crowdingCoefficients, reproductionProbabilities, deathProbabilities, results);
 
             Console.WriteLine("]");
 
             //----------------------//
 
-            //Scrivo a file
+            //Write the results to a file
             File.Delete(path);
             StreamWriter file = File.AppendText(path);
             file.WriteLine("NSIMULATIONS ITERATIONS R_D");
@@ -116,8 +115,10 @@ namespace LogisticSimulation
             file.Close();
         }
 
+        //Run multiple simulations
         static void MultipleSimulations(List<int> startPopulations, List<double> crowdingCoefficients, List<double> reproductionProbabilities, List<double> deathProbabilities, string[,,] results)
         {
+            //For each combination of parameters
             for(int i = 0; i < startPopulations.Count; i++)
             {
                 int startPopulation = startPopulations[i];
@@ -128,7 +129,7 @@ namespace LogisticSimulation
                     {
                         double reproductionProbability = reproductionProbabilities[z];
                         double deathProbability = deathProbabilities[z];
-                        //Eseguo la simulazione e Salvo i risultati
+                        //Run the simulation with the given parameters
                         results[i, y, z] = $"{startPopulation} {crowdingCoefficient} {reproductionProbability} {deathProbability} {SingleSimulation(startPopulation, crowdingCoefficient, reproductionProbability, deathProbability)}";
                     }
                 }
@@ -136,9 +137,12 @@ namespace LogisticSimulation
             }
         }
 
+        //Run a single simulation
         static string SingleSimulation(int nCreatureStart, double crowdingCoefficient, double reproductionProbability, double deathProbability)
         {
+            //Run the simulation multiple times with the same parameters and average the results
             List<int> simulationInfo = new List<int>(Enumerable.Repeat(0, ITERATIONS));
+            //Run the simulation multiple times and add the results
             for (int i = 0; i < NSIMULATIONS; i++)
             {
                 Simulation sim = new((short)nCreatureStart, reproductionProbability, deathProbability, crowdingCoefficient, Prime.GetNextPrime());
@@ -147,7 +151,7 @@ namespace LogisticSimulation
                 for (int j = 1; j < ITERATIONS; j++)
                     simulationInfo[j] += sim.NextIteration();
             }
-
+            //Average the results
             for (int i = 0; i < simulationInfo.Count; ++i)
                 simulationInfo[i] = (int)Math.Round((double)simulationInfo[i] / NSIMULATIONS);
 

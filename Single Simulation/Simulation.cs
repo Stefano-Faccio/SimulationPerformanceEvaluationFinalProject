@@ -29,16 +29,20 @@ namespace LogisticSimulation
             this.crowdingCoefficient = crowdingCoefficient;
         }
 
+        //Main events of the simulation
         public short NextIteration()
         {
+            //If there are creatures
             if(creatureCounter > 0)
             {
+                //Keep track of the change in the number of creatures
                 short deltaCreature = 0;
-
-                //Create a list of random numbers
+                //Sample the list of random numbers => 2 * creatureCounter (one for reproduction and one for death)
                 double[] probabilities = mersenneTwister.NextDoubles(2 * (short)creatureCounter);
+                //Rejection sampling
                 for (int i = 0; i < creatureCounter; ++i)
                 {
+                    //(i << 1) is equivalent to (i * 2) but faster
                     if (probabilities[(i << 1)] < reproductionProbability)
                         ++deltaCreature;
 
@@ -53,6 +57,7 @@ namespace LogisticSimulation
             return (short)creatureCounter;
         }
 
+        //Not used
         public short NextIteration_New()
         {
             short deltaCreature = 0;

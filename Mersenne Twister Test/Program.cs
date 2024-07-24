@@ -6,16 +6,13 @@ namespace MersenneTwistertest
 {
     internal class Program
     {
-        static string path = "../../../data.txt";
+        static string path = "data.txt";
         static int NSEED = 100;
         static int NSAMPLE = 100000;
         static void Main(string[] args)
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-            if (!System.Environment.OSVersion.Platform.ToString().ToLower().Contains("win"))
-                path = "data.txt";
-
-            //Se ho dei parametri validi da riga di comando
+            //Check the parameters from the command line
             if(args.Length == 2 && Int32.TryParse(args[0], out int nseed) && Int32.TryParse(args[1], out int nsampe)) 
             {
                 NSEED = nseed;
@@ -24,31 +21,29 @@ namespace MersenneTwistertest
                 Console.WriteLine($"N of seeds: {NSEED}, N of samples: {NSAMPLE}");
             }
 
-            //Cancello e apro il file dove salvo i dati
+            //Delete the file if it exists and create a new one to write the data
             File.Delete(path);
             StreamWriter file = File.AppendText(path);
-
-            //Sampo sul file i dati iniziali
-            //file.WriteLine($"{NSEED} {NSAMPLE}");
-
+            
+            //Lists of seeds and samples
             List<int> seeds = new(NSEED);
             List<Double[]> samples = new(NSEED);
 
-            //Prendo i dati
+            //Sample the data
             for (int i = 0; i < NSEED; i++)
             {
-                //Prendo il seed
+                //Get next seed
                 seeds.Add(Prime.GetNextPrime());
-                //Nuovo mersenne twister
+                //New instance of the MersenneTwister with the new seed
                 MersenneTwister mst = new(seeds[i]);
-                //Campiono
+                //Get all the samples
                 samples.Add(mst.NextDoubles(NSAMPLE));
-
+                //Just for the user to know that the program is working
                 Console.Write(".");
             }
 
-            //Stampo i dati a file
-            //Prima tutti i seed
+            //Write the data to the file
+            //First the seeds
             file.WriteLine(string.Join(" ", seeds));
             for (int i = 0; i < NSAMPLE; i++)
             {
