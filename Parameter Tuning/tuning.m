@@ -188,14 +188,14 @@ cb = colorbar;
 cb.Label.String = '\DeltaL (log scale)';
 set(gca, 'ColorScale', 'log');
 title_ = ["Scaled absolute difference between theoretical carrying capacity", "and observed carrying capacity (\DeltaL)"];
-title(title_)
+%title(title_)
 subtitle_ = ["Discrete growth rate (r): " + GROWTH_RATE + ";", ...
     "Initial population (N_0) range: "+ START_START_POPULATION + "-" + END_START_POPULATION + "; step: " + STEP_POPULATION+ "];", ...
     "Reproduction probability (R) range: "+ START_REPRODUCTION_PROBABILITY + "-" + END_REPRODUCTION_PROBABILITY + "; step: " + STEP_REPRODUCTION_PROBABILITY+ "];", ...
     "Crowding coefficient (c) range: "+ START_CROWDING_COEFFICIENT + "-" + END_CROWDING_COEFFICIENT + "; step: " + STEP_CROWDING_COEFFICIENT+ "];", ...
     "Death probability (D) range: "+ START_DEATH_PROBABILITY + "-" + END_DEATH_PROBABILITY + "; step: " + STEP_DEATH_PROBABILITY+ "];", ...
     "Simulations: " + NSIMULATIONS + "; Iterations: last " + 200 + " (out of " + ITERATIONS+ ");"];
-subtitle(subtitle_);
+%subtitle(subtitle_);
 box on;
 
 %%

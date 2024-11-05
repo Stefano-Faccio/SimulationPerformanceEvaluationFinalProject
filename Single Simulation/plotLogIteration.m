@@ -94,8 +94,8 @@ function [popTGrandMean,popTMean, popTVar] = plotLogIteration(T, arrayE, arrayL,
         "Theory inflection population (N*): "+INFLECTION_POPULATION+"; Theory inflection time (t*): "+INFLECTION_TIME+ ";",...
         "R: " + R + "; D: " + D + "; c: " +  C + "; N_0: " + N_0 + ";"];
     end
-    title(title_, fontsize=20);
-    subtitle(subtitle_, fontsize=18);
+    %title(title_, fontsize=20);
+    %subtitle(subtitle_, fontsize=18);
     
     ax = gca;
     fontsize(ax, scale=1.8);

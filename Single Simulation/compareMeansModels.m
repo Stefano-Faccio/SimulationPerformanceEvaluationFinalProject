@@ -35,6 +35,89 @@ function compareMeansModels(TIME, INFLECTION_TIME, MeanArray, MeanArrayCIs, upCI
     % of the iterations means, globally and in subsequent time frames
     [resCM, trueCM, falseCM, stat_rangesCM] = isInCI(MeanArrayCIs, CM, INFLECTION_TIME);
     [resDM, trueDM, falseDM, stat_rangesDM]= isInCI(MeanArrayCIs, DM, INFLECTION_TIME);
+       
+    %tl = tiledlayout(2,3);
+    %title(tl, ["A) B) C) Comparison of CM and DM fitting of \mu(N_i) values through the analysis of raw residuals", "D) E) F) Number of model population values that (do not) fall into the corresponding \mu(N_i) 95% CIs", "[ Population values belonging to \mu(N_i) 95% CIs: True; Otherwise: False ]"], fontsize=24)
+    
+    % A) B) C) Comparison of CM and DM fitting of \mu(N_i) values through the analysis of raw residuals
+    figure;
+    hold on;
+    errorbar(TIME, MeanArray, downCI, upCI, ".");
+    plot(TIME,CM, Color="#29AB87");
+    plot(TIME,DM, ".", Color="#FF8243");
+    xlabel("time");
+    ylabel("\mu(N_i)");
+    legend ("\mu(N_i) 95% CIs", "CM: continuous model", "DM: discrete model", Location="southeast");
+    %title(["A) Big picture of the CM and DM fitting","of the experimental \mu(N_i) values"]);
+    ax=gca;
+    fontsize(ax, "scale", 1.6);
+    box on;
+    hold off;
+
+    figure;
+    hold on;
+    plot(TIME,MeanArray-CM, ".",Color="#29AB87", LineWidth=1.5);
+    yline(0, '-', '\DeltaN=0',Color="#8C92AC",LineWidth=1.25);
+    ylabel("\DeltaN");
+    xlabel("t (time) - units");
+    %title(["B) Difference in population (\DeltaN) between \mu(N_i)"," and continuous logistic growth per time unit;"]);
+    legend("CM Raw residuals", Location="southeast");
+    ax=gca;
+    fontsize(ax, "scale", 1.6);
+    box on;
+    hold off;
+
+    figure;
+    hold on;
+    plot(TIME,MeanArray-DM, ".", Color="#FF8243", LineWidth=1.5);
+    yline(0, '-', '\DeltaN=0',Color="#8C92AC" ,LineWidth=1.25);
+    ylabel("\DeltaN");
+    xlabel("t (time) - units");
+    %title(["C) Difference in population (\DeltaN) between \mu(N_i)"," and discrete logistic growth per time unit;"]);
+    legend("DM Raw residuals", Location="southeast");
+    ax=gca;
+    fontsize(ax, "scale", 1.6);
+    box on;
+    hold off;
+    
+    % D) E) F) Number of model population values that (do not) fall into the corresponding \mu(N_i) 95% CIs
+    % [ Population values belonging to \mu(N_i) 95% CIs: True; Otherwise: False ]
+    figure;
+    % visualize stacked bar plot of false over true values for continuos
+    % and discrete model (side by side)
+    %"D) Global comparison of the CM (continuous)","and DM (discrete) models"
+    plotBarCI([], ...
+            ["Number of true and false population (N)","values per logistic growth model"], { 'CM','DM','FM', '', '','', '',}, ...
+            [trueCM, falseCM; trueDM, falseDM]);
+    figure;
+    % visualize stacked bar plot of false over true values for continuos
+    % model in subsequent time frames (check last time frame)
+    %"E) Comparison within the CM model;", "t* (inflection time): "+INFLECTION_TIME+";"
+    plotBarCI([], ...
+            ["Number of true and false population (N)","values per time range"], {'t_{0} - t*','t* - 2t*','2t* - 3t*', '3t* - 4t*', '4t* - t_{end}', "",''}, ...
+            stat_rangesCM');
+    figure;
+    % visualize stacked bar plot of false over true values for discrete
+    % model in subsequent time frames (check last time frame)
+    %"F) Comparison within the DM model;", "t* (inflection time): "+INFLECTION_TIME+";" 
+    plotBarCI([], ...
+            ["Number of true and false population (N)","values per time range"], {'t_{0} - t*','t* - 2t*','2t* - 3t*', '3t* - 4t*', '4t* - t_{end}',"", ''}, ...
+            stat_rangesDM');
+    hold off;
+end
+
+%{
+function compareMeansModels(TIME, INFLECTION_TIME, MeanArray, MeanArrayCIs, upCI, downCI, CM, DM)
+
+    % Which of the 2 models fits the iteration means better? theory vs practice
+
+    % CM: continuous model
+    % DM: discrete model (best candidate, but not continuous)
+
+    % Compute the belonging (true/false) of CM and DM population values into the 95% CIs
+    % of the iterations means, globally and in subsequent time frames
+    [resCM, trueCM, falseCM, stat_rangesCM] = isInCI(MeanArrayCIs, CM, INFLECTION_TIME);
+    [resDM, trueDM, falseDM, stat_rangesDM]= isInCI(MeanArrayCIs, DM, INFLECTION_TIME);
         
     figure;
     tl = tiledlayout(2,3);
@@ -105,3 +188,5 @@ function compareMeansModels(TIME, INFLECTION_TIME, MeanArray, MeanArrayCIs, upCI
             stat_rangesDM');
     hold off;
 end
+
+%}

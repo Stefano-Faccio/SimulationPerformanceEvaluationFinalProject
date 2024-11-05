@@ -24,7 +24,9 @@ function compareLogGrowths(k,N_0,L,inflection_t, tmax)
         Discrete_Model(i) = Discrete_Model(i-1) + (Discrete_Model(i-1)*k)*(1 - Discrete_Model(i-1)/L);
     end
     
-    % 1) The big picture of the comparison between continuous and discrete logistic growth models
+    % Image 1
+    % The big picture of the comparison between continuous and discrete logistic growth models
+    %{
     figure;
     tiledlayout(2,1)
     
@@ -60,8 +62,11 @@ function compareLogGrowths(k,N_0,L,inflection_t, tmax)
     ax.TitleHorizontalAlignment="center"; 
     box on;
     hold off;
+    %}
 
-    % 2) The difference between continuous and discrete growth (in terms of population per time unit)
+    % Image 2
+    % The difference between continuous and discrete growth (in terms of population per time unit)
+    %{
     figure;
     tl= tiledlayout(2,2);
     title(tl,["Comparison of continuous and discrete logistic growth in subsequent time frames", "[Discrete = continuous growth rate (r = k): " + k+"; Initial population (N_0): " + N_0 + "; Carrying capacity (L): "+ L+"]"]);
@@ -129,5 +134,80 @@ function compareLogGrowths(k,N_0,L,inflection_t, tmax)
     fontsize(ax, scale=2.2);
     box on;
     hold off;
+    %}
+
+    myMarkerSize = 15;
+
+    %1) Time range: [0-49]; t*=49
+    figure;
+    hold on;
+    plot(t(1:inflection_t), N_t(1:inflection_t), LineWidth=1.5, Color="k");
+    plot(t(1:inflection_t), Discrete_Model(1:inflection_t), ".", Color="#0072BD", LineWidth=1.25, MarkerSize=myMarkerSize);
+    axis tight;
+    title_ = "Time range: [" + 0 + " - " + inflection_t + "]; t*: " + inflection_t + ";";
+    %title(title_);
+    ylabel("N (population) - units");
+    xlabel("t (time) - units");
+    leg= legend("Continuous", "Discrete");
+    leg.Location="southeast";
+    title(leg, 'Logistic growth models');
+    ax = gca;
+    fontsize(ax, scale=2.2);
+    box on;
+    hold off;
+
+    % 2) Time range: [49-98]; 2xt*=98
+    figure;
+    hold on;
+    plot(t(inflection_t: inflection_t*2), N_t(inflection_t: inflection_t*2), LineWidth=1.5, Color="k");
+    plot(t(inflection_t: inflection_t*2), Discrete_Model(inflection_t: inflection_t*2), ".", Color= "#D95319",LineWidth=1.25, MarkerSize=myMarkerSize);
+    axis tight;
+    title_ = "Time range: [" + inflection_t + " - " + inflection_t*2 + "]; 2xt*: " + inflection_t*2 + ";";
+    %title(title_);
+    leg= legend("Continuous", "Discrete");
+    leg.Location="southeast";
+    title(leg, 'Logistic growth models');
+    ylabel("N (population) - units");
+    xlabel("t (time) - units");
+    ax = gca;
+    fontsize(ax, scale=2.2);
+    box on;
+    hold off;
+
+    % 3) Time range: [98-196]; 4xt*=196
+    figure;
+    hold on;
+    plot(t(inflection_t*2:inflection_t*4), N_t(inflection_t*2:inflection_t*4), LineWidth=1.5, Color="k");
+    plot(t(inflection_t*2:inflection_t*4), Discrete_Model(inflection_t*2:inflection_t*4), ".", Color= "#EDB120",LineWidth=1.25, MarkerSize=myMarkerSize);
+    axis tight;
+    leg= legend("Continuous", "Discrete");
+    leg.Location="southeast";
+    title(leg, 'Logistic growth models');
+    title_ = "Time range: [" + inflection_t*2 + " - " + inflection_t*4 + "]; 4xt*: " + inflection_t*4 + ";";
+    %title(title_);
+    ylabel("N (population) - units");
+    xlabel("t (time) - units");
+    ax = gca;
+    fontsize(ax, scale=2.2);
+    box on;
+    hold off;
     
+    % 4) Time range: [196-400]; 8xt*=392
+    figure;
+    hold on;
+    plot(t(inflection_t*4:tmax), N_t(inflection_t*4:tmax), LineWidth=1.5, Color="k");
+    plot(t(inflection_t*4:tmax), Discrete_Model(inflection_t*4:tmax), ".", Color= "#7E2F8E",LineWidth=1.25, MarkerSize=myMarkerSize);
+    axis tight;
+    title_ = "Time range: [" + inflection_t*4 + " - " + tmax + "]; 8xt*: " + inflection_t*8 + ";";
+    %title(title_);
+    leg= legend("Continuous", "Discrete");
+    title(leg, 'Logistic growth models');
+    leg.Location="southeast";
+    ylabel("N (population) - units");
+    xlabel("t (time) - units");
+    ax = gca;
+    fontsize(ax, scale=2.2);
+    box on;
+    hold off;
+
 end

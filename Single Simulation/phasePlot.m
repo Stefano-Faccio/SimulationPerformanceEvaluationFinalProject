@@ -28,9 +28,11 @@ function phasePlot(k,C,N_0,t,xlimit)
     maxN_t = max(N_t);
     xline(maxN_t, "-", "N_{max}", 'LabelOrientation', 'aligned',LineWidth=1.5, Color="#EDB120")
     ylabel(" dN/dt (N_t') ");
-    title("Logistic growth phase plot");
-    subtitle_ = "N_0: " + N_0 + "; N_{max}: " + round(maxN_t,2)+"; c: " + C + "; k: " + k + "; L: " + L+"; L/2: " + L/2 + ";"; 
-    subtitle(subtitle_);
+    %title("Logistic growth phase plot");    
+    %subtitle_ = "N_0: " + N_0 + "; N_{max}: " + round(maxN_t,2)+"; c: " + C + "; k: " + k + "; L: " + L+"; L/2: " + L/2 + ";"; 
+    %subtitle(subtitle_);
+    %disp("Logistic growth phase plot")
+    %disp(subtitle_)
     axis tight;
     xlim([0 xlimit])
     box on;

@@ -65,11 +65,11 @@ function plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,string)
     xlabel("t (time) - units");
     
     if string=="sf"
-        title("Solution to the Logistic Equation: Slope Field");
+        %title("Solution to the Logistic Equation: Slope Field");
         subtitle_ = ["N_0 (initial population): " + N_0 + "; c (crowding coefficient): " + C + ";" , "k (continuous growth rate): " + k + "; L (carrying capacity): " + L+";"]; 
 
     elseif string=="curve"
-        title("Logistic growth model");
+        %title("Logistic growth model");
         subtitle_ = [" (The exponential growth model is displayed as a reference)", ... 
             "N_0 (initial population): " + N_0 + "; N_{max} (maximum population at time t="+ tmax+ "): " + round(maxN_t,2)+ ";",  ...
             "c (crowding coefficient): " + C + "; k (continuous growth rate): " + k + ";", ...

@@ -150,6 +150,7 @@ ci95_iterationVar_up = ci95_iterationVar(2, :) - iterationVar;
 suppTable3 =  table(iterationVar', ci95_iterationVar(1, :)',ci95_iterationVar(2, :)');
 writetable(suppTable3,'SupplementaryTable3.csv','WriteRowNames',true);  
 
+%%
 % Box plot of the iteration means and variances distribution. 
 % A) Long-term behaviour included vs. B) excluded.
 
@@ -202,6 +203,7 @@ hold off;
 % The number of outliers for the iteration variances is 0 out of 184 data
 % points: 0% (without tail)
 
+%%
 % Compare residuals between iteration means and continuous (CM) model
 % Compare residuals between iteration means and discrete (DM) model
 % Assess heteroskedasticity of residuals (unequal variance) between head (short-term behavior: [t0-2xt*])
@@ -220,10 +222,11 @@ end
 
 compareMeansModels(TIME, INFLECTION_TIME, iterationMean, ci95_iterationMean, ci95_iterationMean_up ,ci95_iterationMean_down, continuous_population,discrete_model_real)
 
+%%
 % What are the constitutive differences between these 2 models? Since they
 % produce a greater (continuous model) and a smaller (discrete model)
 % v-shape when compared with the experimental growth?
-%compareLogFittedGrowths(TIME, continuous_population, discrete_model_real, GROWTH_RATE, CARRYING_CAPACITY, START_POPULATION, INFLECTION_TIME)
+compareLogFittedGrowths(TIME, continuous_population, discrete_model_real, GROWTH_RATE, CARRYING_CAPACITY, START_POPULATION, INFLECTION_TIME)
 
 %%
 
@@ -244,14 +247,14 @@ Gillespie_Model = [Gillespie_Model_Times; Gillespie_Model_Values];
 % model, knowing that gillespie time starts at 1 and CM at 0
 gillespie_continuous_population =  continuous_model([CARRYING_CAPACITY GROWTH_RATE],Gillespie_Model_Times-1);
 
+%%
 % we now check if residuals are normally distributed in both our simulation
 % and gillespie (compared with the continuous model)
 % and check if heteroskedasticity is also present in the gillepsie
 % simulation and to what extent
 % is there a best simulation approach?
-
-%compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW,iterationMean,continuous_population)
-%compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model_Times, Gillespie_Model_Values, gillespie_continuous_population)
+compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW,iterationMean,continuous_population)
+compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model_Times, Gillespie_Model_Values, gillespie_continuous_population)
 
 % Gillespie residuals have a smaller minimum
 % and their distribution is closer to normal
@@ -262,7 +265,7 @@ gillespie_continuous_population =  continuous_model([CARRYING_CAPACITY GROWTH_RA
 %%
 % Extra linear model fitting (optional)
 %[residualsStd,fitIntercept, fitSlope, fitInterceptCI, fitSlopeCI, fitInterceptSE, fitSlopeSE, fitInterceptTstat, fitSlopeTstat, fitSlopePvalue] = fitLinearModel(iterationMean, TIME, GROWTH_RATE, CARRYING_CAPACITY, ITERATIONS_TO_SHOW);
-
+%%
 % Extra non-linear model fitting (legacy) -  we already have a fit to the
 % theoretical model, it is our iteraion means, this is our experimental fit
 % to compare with the continuous model
