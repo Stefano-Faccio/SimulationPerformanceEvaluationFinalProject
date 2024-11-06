@@ -76,9 +76,9 @@ function [popTGrandMean,popTMean, popTVar] = plotLogIteration(T, arrayE, arrayL,
     timeWiseMean = plot(t,popTMean, 'k', 'LineWidth', 1.5);
     % additional info (inflection population and time)
     inflectionPopY = yline(INFLECTION_POPULATION,"r:", "N*",  'LineWidth', 1.5);
-    inflectionTimeX = xline(INFLECTION_TIME,  "b:","t*",'LineWidth', 1.5);
+    inflectionTimeX = xline(INFLECTION_TIME,  "b:","t*",'LabelOrientation', 'horizontal', 'LineWidth', 1.5);
     
-    xlabel("t (time) - iterations");
+    xlabel("t (time) - units");
     ylabel('N (Population)');
     legend([pEm pLm timeWiseMean popTGrandMeanY inflectionPopY inflectionTimeX], 'Exponential growth', 'Logistic growth','Iteration means \mu(N_i)', 'Iteration grand mean', 'N*', 't*', Location='southeast');
     ylim([ymin ymax]);

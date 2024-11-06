@@ -45,7 +45,7 @@ inflection_t = ceil((-1/k)*log(1/coeff));
 
 %Immagini paper
 %compareLogGrowths(k,N_0,L,inflection_t, tmax);
-
+%%
 % Single Simulation Output data load & formatting
 
 clear;
@@ -124,7 +124,7 @@ continuous_population =  continuous_model([CARRYING_CAPACITY GROWTH_RATE],TIME);
 % qualitative evaluation (for a chosen number of first n iterations) 
 % iteration cut at 2* inflection time
 [nIterationGrandMean,nIterationMean]  = plotLogIteration(all_my_data_t, exponential_population, continuous_population, NSIMULATIONS, ITERATIONS, ITERATIONS_TO_SHOW, 0, colors,ymin,ymax, CROWDING_COEFFICIENT,REPRODUCTION_PROBABILITY,DEATH_PROBABILITY,START_POPULATION, INFLECTION_POPULATION, INFLECTION_TIME);
-
+%%
 % Iteration grand mean = Simulation grand mean
 
 % Matlab built-in Bootstrap method to obtain 95% CI for each iteration mean

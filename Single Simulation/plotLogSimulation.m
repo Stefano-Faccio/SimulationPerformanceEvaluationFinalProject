@@ -55,7 +55,7 @@ function [popGrandMean, popMean] = plotLogSimulation(T, nSim, nIter, timeCut, mo
     end
     subtitle(subtitle_);
     legend([popGrandMeanY, inflectionPopY inflectionTimeX], " Simulation grand mean", " N*", " t*", Location="southeast");
-    xlabel("t (time) - iterations");
+    xlabel("t (time) - units");
     ylabel('N (Population)');
     axis tight;
     ax = gca;

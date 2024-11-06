@@ -47,15 +47,15 @@ function plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,string)
     end
     
     % plot relevant y values 
-    yline(L, "r--","N=L", LineWidth=1.5);
-    yline(N_0, "g-","N_0", LineWidth=1.5);
-    yline(0, "b--","N=0", LineWidth=1.5);
+    yline(L, "r--","N=L   ", LineWidth=1.5);
+    yline(N_0, "g-","N_0  ", LineWidth=1.5);
+    yline(0, "b--","N=0  ", 'LabelVerticalAlignment', 'bottom', LineWidth=1.5);
     
     if string=="curve"
         % additional information
         maxN_t = max(y);
-        yline(maxN_t, "-", "N_{max}",LineWidth=1.5, Color="#EDB120");
-        yline(L/2, "m-", "N=L/2",'LabelOrientation', 'horizontal', LineWidth=1.5)
+        yline(maxN_t, "-", "                                         N_{max}", 'LabelVerticalAlignment', 'bottom', 'LabelHorizontalAlignment', 'center', LineWidth=1.5, Color="#EDB120");
+        yline(L/2, "m-", "N*=L/2  ",'LabelOrientation', 'horizontal', LineWidth=1.5)
         coeff =(L/N_0)-1;
         inflection_t = (-1/k)*log(1/coeff);
         xline(inflection_t,"c-", "t^*", 'LabelOrientation', 'horizontal', LineWidth=1.5)
@@ -76,7 +76,7 @@ function plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,string)
             "L (carrying capacity): " + L+"; L/2 (inflection population): " + L/2 + "; t* (inflection time): " + round(inflection_t,2)+";"]; 
     end
 
-    subtitle(subtitle_);
+    %subtitle(subtitle_);
     axis tight;
     box on;
     ylim([Nmin Nmax]);

@@ -21,18 +21,20 @@ function phasePlot(k,C,N_0,t,xlimit)
     plot(N_t, firstDerivativeN_t, '-', Color ='#5A5A5A', LineWidth=1.25);
     xlabel("N (population)");
     % relevant x values (about N)
-    xline(L/2, "m-", "L/2",'LabelOrientation', 'horizontal',LineWidth=1.5)
-    xline(L, "r--", "L", 'LabelOrientation', 'horizontal',LineWidth=1.5)
-    xline(N_0, "g-", "N_0",'LabelOrientation', 'horizontal',LineWidth=1.5)
-    xline(0, "b--",'LabelOrientation', 'horizontal',LineWidth=1.5)
+    xline(L/2, "m-", {"", "N*=L/2"},'LabelOrientation', 'horizontal',LineWidth=1.5)
+    xline(L, "r--", {"","L"}, 'LabelOrientation', 'horizontal', 'LabelHorizontalAlignment', 'left', LineWidth=1.5)
+    xline(N_0, "g-", {"","N_0"},'LabelOrientation', 'horizontal',LineWidth=1.5)
+    xline(0, "b--",'LabelOrientation', 'horizontal', LineWidth=1.5)
     maxN_t = max(N_t);
-    xline(maxN_t, "-", "N_{max}", 'LabelOrientation', 'aligned',LineWidth=1.5, Color="#EDB120")
+    xline(maxN_t, "-", {"", "N_{max}"}, 'LabelOrientation', 'horizontal', 'LabelHorizontalAlignment', 'left', LineWidth=1.5, Color="#EDB120")
     ylabel(" dN/dt (N_t') ");
     %title("Logistic growth phase plot");    
     %subtitle_ = "N_0: " + N_0 + "; N_{max}: " + round(maxN_t,2)+"; c: " + C + "; k: " + k + "; L: " + L+"; L/2: " + L/2 + ";"; 
     %subtitle(subtitle_);
     %disp("Logistic growth phase plot")
     %disp(subtitle_)
+    ax = gca;
+    fontsize(ax, scale=2.0);
     axis tight;
     xlim([0 xlimit])
     box on;
