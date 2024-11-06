@@ -22,7 +22,7 @@ function plotBarCI(title_, xlabel_, xticks_, yBar_)
         'Color', 'w',....
         'FontSize', 12);
     xlabel(xlabel_);
-    ylabel("t (time) - iterations")
+    ylabel("t (time) - units")
     legend(["True", "False"], Location="northwest");
     title(title_, FontSize=8)
     set(bar1, 'FaceColor', 'Flat');
@@ -31,6 +31,6 @@ function plotBarCI(title_, xlabel_, xticks_, yBar_)
     xticklabels('manual');
     ax = gca;
     xticklabels(ax,xticks_);
-    fontsize(ax, scale=1.9);
+    fontsize(ax, scale=2.2);
 
 end

@@ -23,7 +23,9 @@
 % (NRMSE is not enough if an analysis of residuals is not performed)
 
 function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model_Times, Gillespie_Model_Values, gillespie_continuous_population)
-   
+
+    fontSize = 2.2;
+
     % 1)
     % ---------------------------------------------------------------------------------------------------------------------
     figure;
@@ -36,7 +38,7 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     %title(["1) Big picture of the CM fitting of the"," experimental Gillepsie \mu(N_i) values"]);
     %title("1)", FontSize=15);
     ax= gca;
-    fontsize(ax, "scale", 1.25);
+    fontsize(ax, "scale", fontSize);
     axis tight;
     hold off;
     
@@ -53,7 +55,7 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     %title("2)", FontSize=15);
     legend("CM Raw residuals", Location="southeast");
     ax= gca;
-    fontsize(ax, "scale", 1.25);
+    fontsize(ax, "scale", fontSize);
     axis tight;
     hold off;
 
@@ -71,7 +73,7 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     xlabel("CM Raw residuals (x)");
     ylabel("Frequency(x)");
     ax= gca;
-    fontsize(ax, "scale", 1.25);
+    fontsize(ax, "scale", fontSize);
     hold off;
     
     % B.1)
@@ -85,7 +87,7 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     xlabel("CM Raw residuals (x)");
     ylabel("Frequency(x)");
     ax= gca;
-    fontsize(ax, "scale", 1.25);
+    fontsize(ax, "scale", fontSize);
     hold off;
     
     % C.1)
@@ -104,7 +106,7 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     xlabel("CM Raw residuals (x)");
     ylabel("Frequency(x)");
     ax= gca;
-    fontsize(ax, "scale", 1.25);
+    fontsize(ax, "scale", fontSize);
     hold off;
 
     % A.2)
@@ -121,9 +123,10 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     title("");
     %title("A.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [t_0 - 2t* (~"+ITERATIONS_TO_SHOW+")];"]);
     %title("A.2)", FontSize=15);
+    set(gca,'YLim',norminv([0.0001 0.9999]),'YTick',norminv([0.001 0.01 0.1 0.5 0.9 0.99 0.999]),'YTickLabel',[0.001 0.01 0.1 0.5 0.9 0.99 0.999]);
     box on;
     ax= gca;
-    fontsize(ax, "scale", 1.15);
+    fontsize(ax, "scale", fontSize);
     hold off;
 
     % B.2)
@@ -140,9 +143,10 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     title("");
     %title("B.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [t_0 - t_{max} (~"+ITERATIONS+")];"]);
     %title("B.2)", FontSize=15);
+    set(gca,'YLim',norminv([0.0001 0.9999]),'YTick',norminv([0.001 0.01 0.1 0.5 0.9 0.99 0.999]),'YTickLabel',[0.001 0.01 0.1 0.5 0.9 0.99 0.999]);
     box on;
     ax= gca;
-    fontsize(ax, "scale", 1.15);
+    fontsize(ax, "scale", fontSize);
     hold off;
     
     % C.2)
@@ -159,9 +163,10 @@ function compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model
     title("");
     %title("C.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [2t* - t_{max}];"]);
     %title("C.2)", FontSize=15);
+    set(gca,'YLim',norminv([0.0001 0.9999]),'YTick',norminv([0.001 0.01 0.1 0.5 0.9 0.99 0.999]),'YTickLabel',[0.001 0.01 0.1 0.5 0.9 0.99 0.999]);
     box on;
     ax= gca;
-    fontsize(ax, "scale", 1.15);
+    fontsize(ax, "scale", fontSize);
     hold off;
 
 end

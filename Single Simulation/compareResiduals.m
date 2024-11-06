@@ -17,19 +17,21 @@
 % (NRMSE is not enough if an analysis of residuals is not performed)
 
 function compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW, MeanArray, CM)
-    
+
+    fontSize = 2.2;
+    residuals_1 = MeanArray-CM;
+
     % A.1)
     % ----------------------------------------------------------------------------------------------------------------------------
     figure;
     hold on;
-    residuals_1 = MeanArray-CM;
     histogram(residuals_1(1:ITERATIONS_TO_SHOW), 20, 'Normalization','pdf', FaceColor="#87A96B");
     %title(["A.1) CM Histogram plot of the head ","(short-term) raw residuals;"],"time range: [t_0 - 2t* ("+ITERATIONS_TO_SHOW+")]");
     %title("A.1)", FontSize=15);
     xlabel("CM Raw residuals (x)");
     ylabel("Frequency(x)");
     ax=gca;
-    fontsize(ax, "scale", 1.5);
+    fontsize(ax, "scale", fontSize);
     box on;
     hold off;
 
@@ -43,7 +45,7 @@ function compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW, MeanArray, CM)
     xlabel("CM Raw residuals (x)");
     ylabel("Frequency(x)");
     ax=gca;
-    fontsize(ax, "scale", 1.5);
+    fontsize(ax, "scale", fontSize);
     box on;
     hold off;
     
@@ -60,7 +62,7 @@ function compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW, MeanArray, CM)
     xlabel("CM Raw residuals (x)");
     ylabel("Frequency(x)");
     ax=gca;
-    fontsize(ax, "scale", 1.5);
+    fontsize(ax, "scale", fontSize);
     box on;
     hold off;
 
@@ -78,8 +80,9 @@ function compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW, MeanArray, CM)
     title([]);
     %title("A.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [t_0 - 2t* ("+ITERATIONS_TO_SHOW+")];"]);
     %title("A.2)", FontSize=15);
+    set(gca,'YLim',norminv([0.0001 0.9999]),'YTick',norminv([0.001 0.01 0.1 0.5 0.9 0.99 0.999]),'YTickLabel',[0.001 0.01 0.1 0.5 0.9 0.99 0.999]);
     ax=gca;
-    fontsize(ax, "scale", 1.5);
+    fontsize(ax, "scale", fontSize);
     box on;
     hold off;
     
@@ -97,8 +100,9 @@ function compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW, MeanArray, CM)
     title([]);
     %title("B.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [t_0 - t_{max} ("+ITERATIONS+")];"]);
     %title("B.2)", FontSize=15);
+    set(gca,'YLim',norminv([0.0001 0.9999]),'YTick',norminv([0.001 0.01 0.1 0.5 0.9 0.99 0.999]),'YTickLabel',[0.001 0.01 0.1 0.5 0.9 0.99 0.999]);
     ax=gca;
-    fontsize(ax, "scale", 1.5);
+    fontsize(ax, "scale", fontSize);
     box on;
     hold off;
     
@@ -116,8 +120,9 @@ function compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW, MeanArray, CM)
     title([]);
     %title("C.2) CM Normal probability plot;", ["NRMSE: "+NRMSE_CM+";","time range: [2t* - t_{max}];"]);
     %title("C.2)", FontSize=15);
+    set(gca,'YLim',norminv([0.0001 0.9999]),'YTick',norminv([0.001 0.01 0.1 0.5 0.9 0.99 0.999]),'YTickLabel',[0.001 0.01 0.1 0.5 0.9 0.99 0.999]);
     ax=gca;
-    fontsize(ax, "scale", 1.5);
+    fontsize(ax, "scale", fontSize);
     box on;
     hold off;
 

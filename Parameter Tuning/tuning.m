@@ -88,7 +88,6 @@ for i=2:2:width(Metrics)
     CoVUpperCI = [CoVUpperCI Metrics(3,i)];
 end
 
-
 % Steady-state (tail) analysis
 % For each parameter setting, we keep the observed L (and other summary statistics)
 % to compare it against the theoretical L
@@ -127,7 +126,6 @@ suppTable1.Properties.VariableNames = ["START_POPULATION","CROWDING_COEFFICIENT"
     "DEATH_PROBABILITY", "ITERATION_GRAND_MEAN", "LOWER_95_CI", "UPPER_95_CI"];
 writetable(suppTable1,'SupplementaryTable1.csv','WriteRowNames',true);  
 
-%%
 % L is CARRYING_CAPACITY
 % For each parameter setting, compute the theoretical L.
 L = [];
@@ -171,9 +169,7 @@ tailMeanT.("ScaledDeltaLPerCent") = ScaledDeltaLPerCent;
 RawScaledDeltaLPerCent = (tailMeanT.RawDeltaL .*100) ./ tailMeanT.TheorL;
 tailMeanT.("RawScaledDeltaLPerCent") = RawScaledDeltaLPerCent;
 
-%%
 figure
-
 % We plot the scaled absolute value of the difference between observed L
 % and the theoretical L to restrict the parameter space
 % to solutions that meet the following functional requirement of the

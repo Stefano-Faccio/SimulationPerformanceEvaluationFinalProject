@@ -34,7 +34,7 @@ function  getParamPlots(tailMeanT, var, sz, label, c_start, c_step, c_end, R_sta
     ylabel(label)
     ytickformat('percentage')
     ax = gca;
-    fontsize(ax, scale=1.2);
+    fontsize(ax, scale=1.5);
     box on;
     hold off;
     
@@ -56,7 +56,7 @@ function  getParamPlots(tailMeanT, var, sz, label, c_start, c_step, c_end, R_sta
     xlabel('c')
     ylabel(label)
     ax = gca;
-    fontsize(ax, scale=1.2);
+    fontsize(ax, scale=1.5);
     ytickformat('percentage')
     hold off;
     
@@ -81,7 +81,7 @@ function  getParamPlots(tailMeanT, var, sz, label, c_start, c_step, c_end, R_sta
     ylabel(label)
     ytickformat('percentage')
     ax = gca;
-    fontsize(ax, scale=1.2);
+    fontsize(ax, scale=1.5);
     hold off;
 
     % 4) histogram to assess the frequency of \DeltaL values:
@@ -93,7 +93,7 @@ function  getParamPlots(tailMeanT, var, sz, label, c_start, c_step, c_end, R_sta
     xtickformat('percentage')
     ylabel('Frequency')
     ax = gca;
-    fontsize(ax, scale=1.2);
+    fontsize(ax, scale=1.5);
 
 end
 

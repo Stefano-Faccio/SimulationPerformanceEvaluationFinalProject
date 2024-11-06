@@ -98,7 +98,7 @@ function [popTGrandMean,popTMean, popTVar] = plotLogIteration(T, arrayE, arrayL,
     %subtitle(subtitle_, fontsize=18);
     
     ax = gca;
-    fontsize(ax, scale=1.8);
+    fontsize(ax, scale=2.5);
     xlim('tight');
     hold off;
     

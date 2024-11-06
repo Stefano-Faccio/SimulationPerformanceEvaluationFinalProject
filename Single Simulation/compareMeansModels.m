@@ -35,6 +35,8 @@ function compareMeansModels(TIME, INFLECTION_TIME, MeanArray, MeanArrayCIs, upCI
     % of the iterations means, globally and in subsequent time frames
     [resCM, trueCM, falseCM, stat_rangesCM] = isInCI(MeanArrayCIs, CM, INFLECTION_TIME);
     [resDM, trueDM, falseDM, stat_rangesDM]= isInCI(MeanArrayCIs, DM, INFLECTION_TIME);
+
+    fontSize = 2.1;
        
     %tl = tiledlayout(2,3);
     %title(tl, ["A) B) C) Comparison of CM and DM fitting of \mu(N_i) values through the analysis of raw residuals", "D) E) F) Number of model population values that (do not) fall into the corresponding \mu(N_i) 95% CIs", "[ Population values belonging to \mu(N_i) 95% CIs: True; Otherwise: False ]"], fontsize=24)
@@ -49,8 +51,9 @@ function compareMeansModels(TIME, INFLECTION_TIME, MeanArray, MeanArrayCIs, upCI
     ylabel("\mu(N_i)");
     legend ("\mu(N_i) 95% CIs", "CM: continuous model", "DM: discrete model", Location="southeast");
     %title(["A) Big picture of the CM and DM fitting","of the experimental \mu(N_i) values"]);
+    xlim([0, 501]);
     ax=gca;
-    fontsize(ax, "scale", 1.6);
+    fontsize(ax, "scale", fontSize);
     box on;
     hold off;
 
@@ -62,8 +65,10 @@ function compareMeansModels(TIME, INFLECTION_TIME, MeanArray, MeanArrayCIs, upCI
     xlabel("t (time) - units");
     %title(["B) Difference in population (\DeltaN) between \mu(N_i)"," and continuous logistic growth per time unit;"]);
     legend("CM Raw residuals", Location="southeast");
+    xlim([0, 501]);
+    ylim([-140, 22]);
     ax=gca;
-    fontsize(ax, "scale", 1.6);
+    fontsize(ax, "scale", fontSize);
     box on;
     hold off;
 
@@ -75,8 +80,10 @@ function compareMeansModels(TIME, INFLECTION_TIME, MeanArray, MeanArrayCIs, upCI
     xlabel("t (time) - units");
     %title(["C) Difference in population (\DeltaN) between \mu(N_i)"," and discrete logistic growth per time unit;"]);
     legend("DM Raw residuals", Location="southeast");
+    xlim([0, 501]);
+    ylim([-140, 22]);
     ax=gca;
-    fontsize(ax, "scale", 1.6);
+    fontsize(ax, "scale", fontSize);
     box on;
     hold off;
     
@@ -87,21 +94,21 @@ function compareMeansModels(TIME, INFLECTION_TIME, MeanArray, MeanArrayCIs, upCI
     % and discrete model (side by side)
     %"D) Global comparison of the CM (continuous)","and DM (discrete) models"
     plotBarCI([], ...
-            ["Number of true and false population (N)","values per logistic growth model"], { 'CM','DM','FM', '', '','', '',}, ...
+            ["Number of True / False population","values per logistic growth model"], { 'CM','DM','FM', '', '','', '',}, ...
             [trueCM, falseCM; trueDM, falseDM]);
     figure;
     % visualize stacked bar plot of false over true values for continuos
     % model in subsequent time frames (check last time frame)
     %"E) Comparison within the CM model;", "t* (inflection time): "+INFLECTION_TIME+";"
     plotBarCI([], ...
-            ["Number of true and false population (N)","values per time range"], {'t_{0} - t*','t* - 2t*','2t* - 3t*', '3t* - 4t*', '4t* - t_{end}', "",''}, ...
+            ["Number of True / False population","values per time range"], {'t_{0} - t*','t* - 2t*','2t* - 3t*', '3t* - 4t*', '4t* - t_{end}', "",''}, ...
             stat_rangesCM');
     figure;
     % visualize stacked bar plot of false over true values for discrete
     % model in subsequent time frames (check last time frame)
     %"F) Comparison within the DM model;", "t* (inflection time): "+INFLECTION_TIME+";" 
     plotBarCI([], ...
-            ["Number of true and false population (N)","values per time range"], {'t_{0} - t*','t* - 2t*','2t* - 3t*', '3t* - 4t*', '4t* - t_{end}',"", ''}, ...
+            ["Number of True / False population","values per time range"], {'t_{0} - t*','t* - 2t*','2t* - 3t*', '3t* - 4t*', '4t* - t_{end}',"", ''}, ...
             stat_rangesDM');
     hold off;
 end

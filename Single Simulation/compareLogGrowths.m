@@ -149,12 +149,14 @@ function compareLogGrowths(k,N_0,L,inflection_t, tmax)
     ylabel("N (population) - units");
     xlabel("t (time) - units");
     leg= legend("Continuous", "Discrete");
-    leg.Location="southeast";
+    leg.Location="northwest";
     title(leg, 'Logistic growth models');
     ax = gca;
     fontsize(ax, scale=2.2);
     box on;
     hold off;
+
+    return;
 
     % 2) Time range: [49-98]; 2xt*=98
     figure;

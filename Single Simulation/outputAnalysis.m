@@ -25,15 +25,15 @@ k = 0.05;
 C = 0.001;
 
 %Immagini paper
-plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,"curve");
-plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,"sf")
+%plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,"curve");
+%plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,"sf")
 
 % Phase plot for logistic equation
 L=k/C;
 t=0:1:100;
 xlimit=L+5;
 %Immagini paper
-phasePlot(k,C,N_0,t,xlimit);
+%phasePlot(k,C,N_0,t,xlimit);
 
 % Comparison of continuous and discrete plots for theoretical logistic
 % growth (bounded)
@@ -124,7 +124,7 @@ continuous_population =  continuous_model([CARRYING_CAPACITY GROWTH_RATE],TIME);
 % qualitative evaluation (for a chosen number of first n iterations) 
 % iteration cut at 2* inflection time
 [nIterationGrandMean,nIterationMean]  = plotLogIteration(all_my_data_t, exponential_population, continuous_population, NSIMULATIONS, ITERATIONS, ITERATIONS_TO_SHOW, 0, colors,ymin,ymax, CROWDING_COEFFICIENT,REPRODUCTION_PROBABILITY,DEATH_PROBABILITY,START_POPULATION, INFLECTION_POPULATION, INFLECTION_TIME);
-
+%%
 % Iteration grand mean = Simulation grand mean
 
 % Matlab built-in Bootstrap method to obtain 95% CI for each iteration mean
@@ -157,7 +157,7 @@ writetable(suppTable3,'SupplementaryTable3.csv','WriteRowNames',true);
 % A) Long-term behaviour included
 %tiledlayout(1,2)
 %nexttile
-%{
+
 figure
 hold on;
 b1 = boxchart([iterationMean', iterationVar'],'Notch','on', 'MarkerStyle','.', 'JitterOutliers','on','BoxFaceColor', "k",'MarkerColor', "#6E7F80");
@@ -168,7 +168,6 @@ fontsize(ax, scale=2.4);
 %title(["A) Box plot of iteration means \mu(N_i)","and variances \sigma^2(N_i)"], "Long-term behaviour included", FontSize= 24)
 box on;
 hold off;
-%}
 
 % The number of outliers for the iteration means is 99 out of 501 data
 % points: 19.7605% (with tail)
@@ -184,7 +183,7 @@ disp("The number of outliers for the iteration variances is " + nVarOutliers(1,2
 
 % A) Long-term behaviour excluded
 %nexttile
-%{
+
 figure
 hold on;
 b2 = boxchart([iterationMean(1:ITERATIONS_TO_SHOW)', iterationVar(1:ITERATIONS_TO_SHOW)'],'Notch','on','MarkerStyle','.', 'BoxFaceColor', "k" , 'MarkerColor', "#6E7F80");
@@ -195,7 +194,8 @@ fontsize(ax1, scale=2.4);
 %title(["B) Box plot of iteration means \mu(N_i)","and variances \sigma^2(N_i)"], "Long-term behaviour excluded", FontSize= 24)
 box on;
 hold off;
-%}
+
+%%
 % The number of outliers for the iteration means is 0 out of 184 data
 % points: 0% (without tail)
 % The number of outliers for the iteration variances is 0 out of 184 data
@@ -250,7 +250,7 @@ gillespie_continuous_population =  continuous_model([CARRYING_CAPACITY GROWTH_RA
 % is there a best simulation approach?
 
 %compareResiduals(ITERATIONS,ITERATIONS_TO_SHOW,iterationMean,continuous_population)
-%compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model_Times, Gillespie_Model_Values, gillespie_continuous_population)
+compareGillespieResiduals(ITERATIONS,ITERATIONS_TO_SHOW,Gillespie_Model_Times, Gillespie_Model_Values, gillespie_continuous_population)
 
 % Gillespie residuals have a smaller minimum
 % and their distribution is closer to normal
