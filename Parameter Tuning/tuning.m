@@ -173,6 +173,7 @@ tailMeanT.("RawScaledDeltaLPerCent") = RawScaledDeltaLPerCent;
 
 %%
 figure
+
 % We plot the scaled absolute value of the difference between observed L
 % and the theoretical L to restrict the parameter space
 % to solutions that meet the following functional requirement of the
@@ -199,6 +200,7 @@ subtitle_ = ["Discrete growth rate (r): " + GROWTH_RATE + ";", ...
 box on;
 
 %%
+
 % We choose/assess the parameter setting(s) that minimize \ScaledDelta L,
 % looking at the percentages of differences (\ScaledDeltaLs) that the settings imply when combined,
 % by comparing parameters in a pair-wise manner, to evaluate how they

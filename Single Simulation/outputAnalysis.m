@@ -25,15 +25,15 @@ k = 0.05;
 C = 0.001;
 
 %Immagini paper
-%plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,"curve");
-%plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,"sf")
+plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,"curve");
+plotLogSForCurve(tmax,Nmax,Nmin,k,C,N_0,"sf")
 
 % Phase plot for logistic equation
 L=k/C;
 t=0:1:100;
 xlimit=L+5;
 %Immagini paper
-%phasePlot(k,C,N_0,t,xlimit);
+phasePlot(k,C,N_0,t,xlimit);
 
 % Comparison of continuous and discrete plots for theoretical logistic
 % growth (bounded)
@@ -44,7 +44,7 @@ tmax=400;
 inflection_t = ceil((-1/k)*log(1/coeff));
 
 %Immagini paper
-%compareLogGrowths(k,N_0,L,inflection_t, tmax);
+compareLogGrowths(k,N_0,L,inflection_t, tmax);
 %%
 % Single Simulation Output data load & formatting
 
@@ -124,7 +124,7 @@ continuous_population =  continuous_model([CARRYING_CAPACITY GROWTH_RATE],TIME);
 % qualitative evaluation (for a chosen number of first n iterations) 
 % iteration cut at 2* inflection time
 [nIterationGrandMean,nIterationMean]  = plotLogIteration(all_my_data_t, exponential_population, continuous_population, NSIMULATIONS, ITERATIONS, ITERATIONS_TO_SHOW, 0, colors,ymin,ymax, CROWDING_COEFFICIENT,REPRODUCTION_PROBABILITY,DEATH_PROBABILITY,START_POPULATION, INFLECTION_POPULATION, INFLECTION_TIME);
-%%
+
 % Iteration grand mean = Simulation grand mean
 
 % Matlab built-in Bootstrap method to obtain 95% CI for each iteration mean
@@ -132,7 +132,6 @@ continuous_population =  continuous_model([CARRYING_CAPACITY GROWTH_RATE],TIME);
 ci95_iterationMean = bootci(NSIMULATIONS, {@mean, table2array(all_my_data)});
 ci95_iterationMean_down = iterationMean - ci95_iterationMean(1, :);
 ci95_iterationMean_up = ci95_iterationMean(2, :) - iterationMean;
-
 
 % 95% confidence intervals for each iteration mean value saved as
 % Supplementary Table 2 for the final report

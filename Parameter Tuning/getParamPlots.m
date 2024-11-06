@@ -22,7 +22,6 @@
 % 4) histogram to assess the frequency of \DeltaL values.
 
 function  getParamPlots(tailMeanT, var, sz, label, c_start, c_step, c_end, R_start, R_step, R_end)
-    
 
     % 1) scatter plot of start population and \DeltaL (scaled percentage)
     % Question: does initial population have an impact on the carrying
@@ -89,16 +88,13 @@ function  getParamPlots(tailMeanT, var, sz, label, c_start, c_step, c_end, R_sta
     % Question: how many cases (parameter settings) are there  where the difference is close to
     % 0%?
     figure
-    hold on;
     histogram(tailMeanT.(var), "EdgeColor", 'w', "FaceColor", "#0FC0FC", "LineWidth", 1);
     xlabel(label)
     xtickformat('percentage')
     ylabel('Frequency')
     ax = gca;
     fontsize(ax, scale=1.2);
-    hold off;
-    
-  
+
 end
 
 %{

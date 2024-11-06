@@ -45,7 +45,7 @@ function compareMeansModels(TIME, INFLECTION_TIME, MeanArray, MeanArrayCIs, upCI
     errorbar(TIME, MeanArray, downCI, upCI, ".");
     plot(TIME,CM, Color="#29AB87");
     plot(TIME,DM, ".", Color="#FF8243");
-    xlabel("time");
+    xlabel("t (time) - units");
     ylabel("\mu(N_i)");
     legend ("\mu(N_i) 95% CIs", "CM: continuous model", "DM: discrete model", Location="southeast");
     %title(["A) Big picture of the CM and DM fitting","of the experimental \mu(N_i) values"]);
